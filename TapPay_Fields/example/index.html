@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TapPay Fields Bootstrap Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 20px 0;
+        }
+        .jumbotron {
+            text-align: center;
+        }
+        .container {
+            max-width: 750px;
+        }
+        form {
+            padding: 40px;
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+        .tappay-field-focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        }
+        .has-error .tappay-field-focus {
+            border-color: #843534;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+        }
+        .has-success .tappay-field-focus {
+            border-color: #2b542c;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>TapPay Fields Bootstrap Example</h1>
+            <p class="lead">TapPay Fields 是 三個 host 在 TapPay 的網頁，利用 iframe 的方式嵌入商家網頁，提供安全的卡號輸入方式</p>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+            </div>
+            <div class="form-group card-number-group">
+                <label for="card-number" class="control-label"><span id="cardtype"></span>卡號</label>
+                <div class="form-control card-number"></div>
+            </div>
+            <div class="form-group expiration-date-group">
+                <label for="expiration-date" class="control-label">卡片到期日</label>
+                <div class="form-control expiration-date" id="tappay-expiration-date"></div>
+            </div>
+            <div class="form-group cvc-group">
+                <label for="cvc" class="control-label">卡片後三碼</label>
+                <div class="form-control cvc"></div>
+            </div>
+
+            <button type="submit" class="btn btn-default">Pay</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v2_3_3"></script>
+    <script>
+        TPDirect.setupSDK(APP_ID, 'APP_KEY', 'sandbox')
+        TPDirect.card.setup({
+            fields: {
+                number: {
+                    element: '.form-control.card-number',
+                    placeholder: '**** **** **** ****'
+                },
+                expirationDate: {
+                    element: document.getElementById('tappay-expiration-date'),
+                    placeholder: 'MM / YY'
+                },
+                ccv: {
+                    element: $('.form-control.cvc')[0],
+                    placeholder: '後三碼'
+                }
+            },
+            styles: {
+                'input': {
+                    'color': 'gray'
+                },
+                'input.ccv': {
+                    // 'font-size': '16px'
+                },
+                ':focus': {
+                    'color': 'black'
+                },
+                '.valid': {
+                    'color': 'green'
+                },
+                '.invalid': {
+                    'color': 'red'
+                },
+                '@media screen and (max-width: 400px)': {
+                    'input': {
+                        'color': 'orange'
+                    }
+                }
+            }
+        })
+        // listen for TapPay Field
+        TPDirect.card.onUpdate(function (update) {
+            /* Disable / enable submit button depend on update.canGetPrime  */
+            /* ============================================================ */
+
+            // update.canGetPrime === true
+            //     --> you can call TPDirect.card.getPrime()
+            // const submitButton = document.querySelector('button[type="submit"]')
+            if (update.canGetPrime) {
+                // submitButton.removeAttribute('disabled')
+                $('button[type="submit"]').removeAttr('disabled')
+            } else {
+                // submitButton.setAttribute('disabled', true)
+                $('button[type="submit"]').attr('disabled', true)
+            }
+
+
+            /* Change card type display when card type change */
+            /* ============================================== */
+
+            // cardTypes = ['visa', 'mastercard', ...]
+            let newType = update.cardType === 'unknown' ? '' : update.cardType
+            $('#cardtype').text(newType)
+
+
+
+            /* Change form-group style when tappay field status change */
+            /* ======================================================= */
+
+            // number 欄位是錯誤的
+            if (update.status.number === 2) {
+                setNumberFormGroupToError('.card-number-group')
+            } else if (update.status.number === 0) {
+                setNumberFormGroupToSuccess('.card-number-group')
+            } else {
+                setNumberFormGroupToNormal('.card-number-group')
+            }
+
+            if (update.status.expiry === 2) {
+                setNumberFormGroupToError('.expiration-date-group')
+            } else if (update.status.expiry === 0) {
+                setNumberFormGroupToSuccess('.expiration-date-group')
+            } else {
+                setNumberFormGroupToNormal('.expiration-date-group')
+            }
+
+            if (update.status.cvc === 2) {
+                setNumberFormGroupToError('.cvc-group')
+            } else if (update.status.cvc === 0) {
+                setNumberFormGroupToSuccess('.cvc-group')
+            } else {
+                setNumberFormGroupToNormal('.cvc-group')
+            }
+        })
+
+        $('form').on('submit', (event) => {
+            event.preventDefault()
+            const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+            console.log(tappayStatus)
+
+            // Check TPDirect.card.getTappayFieldsStatus().canGetPrime before TPDirect.card.getPrime
+            if (tappayStatus.canGetPrime === false) {
+                alert('can not get prime')
+                return
+            }
+
+            // Get prime
+            TPDirect.card.getPrime((result) => {
+                if (result.status !== 0) {
+                    alert('get prime error ' + result.msg)
+                    return
+                }
+                alert('get prime 成功，prime: ' + result.card.prime)
+            })
+        })
+
+        function setNumberFormGroupToError(selector) {
+            $(selector).addClass('has-error')
+            $(selector).removeClass('has-success')
+        }
+
+        function setNumberFormGroupToSuccess(selector) {
+            $(selector).removeClass('has-error')
+            $(selector).addClass('has-success')
+        }
+
+        function setNumberFormGroupToNormal(selector) {
+            $(selector).removeClass('has-error')
+            $(selector).removeClass('has-success')
+        }
+    </script>
+</body>
+
+</html>
