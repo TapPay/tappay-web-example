@@ -211,15 +211,16 @@
                     billingContact: billingContact
                 }, null, 4))
 
-    var command = `Use following command to send to server \n\n
-curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime
--H 'content-type: application/json'
--H 'x-api-key: your_partner_key'
+var command = `Use following command to send to server \n\n
+curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+-H 'content-type: application/json' \\
+-H 'x-api-key: your_partner_key' \\
 -d '{
     "partner_key": "YOUR_PARTNER_KEY",
     "prime": "${prime}",
     "amount": "${amount}",
     "merchant_id": "YOUR_MERCHANT",
+    "details": "Some item",
     "cardholder": {
         "phone_number": "",
         "name": "${billingContact.familyName + billingContact.givenName}",

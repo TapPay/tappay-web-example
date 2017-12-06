@@ -1,7 +1,7 @@
 # Line Pay with TapPay
 
 ## DEMO
-![](https://media.giphy.com/media/l3mZlwqcNL4TT3e7u/giphy.gif)
+![](https://media.giphy.com/media/3oxHQgbrhUwaba5FnO/giphy.gif)
 
 ## Required
 1. 請搭配 web SDk v2.3.3 使用 Line Pay, 舊版本不支援 Line Pay
@@ -69,7 +69,7 @@ clientip | String | 交易者的 IP 位置
     <div class="payment-view ui grid centered stackable doubling">
         <br>
         <div class="row"></div>
-        <div class="eight wide column ">
+        <div class="ten wide column ">
             <div class="ui center aligned segment">
                 <h2> Line Pay Test</h2>
                 <button id='sendButton' class="ui button">Pay with Line Pay</button>
@@ -90,6 +90,29 @@ clientip | String | 交易者的 IP 位置
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送
             // 然後再用 TapPay.redirect(payment_url) 到 Line Pay 付款頁面
+var command = `Use following command to send to server \n\n
+curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime
+-H 'content-type: application/json'
+-H 'x-api-key: YOUR_PARTNER_KEY'
+-d '{
+    "partner_key": "YOUR_PARTNER_KEY",
+    "prime": "${result.prime}",
+    "amount": "1",
+    "merchant_id": "YOUR_MERCHANT",
+    "details": "Some item",
+    "cardholder": {
+        "phone_number": "+886923456789",
+        "name": "王小明",
+        "email": "LittleMing@Wang.com",
+        "zip_code": "100",
+        "address": "台北市天龍區芝麻街1號1樓",
+        "national_id": "A123456789"
+    },
+    "result_url": {
+        "frontend_redirect_url": "https://your.server.com/notify",
+        "backend_notify_url": "https://your.server.com/notify"
+    }
+}'`
         })
     })
 </script>

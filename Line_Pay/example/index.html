@@ -24,7 +24,10 @@
                 <button id='sendButton' class="ui button">Pay with Line Pay</button>
             </div>
             <div class="ui segment">
-                <pre id="result1" class="ui info message"></pre>
+                <pre id="result1" class="ui info message" style="overflow-x: auto"></pre>
+            </div>
+            <div class="ui segment">
+                <pre id="curl" class="ui info message" style="overflow-x: auto">
             </div>
         </div>
     </div>
@@ -39,6 +42,31 @@
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送
             // 然後再用 TapPay.redirect(payment_url) 到 Line Pay 付款頁面
+var command = `Use following command to send to server \n\n
+curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+-H 'content-type: application/json' \\
+-H 'x-api-key: YOUR_PARTNER_KEY' \\
+-d '{
+    "partner_key": "YOUR_PARTNER_KEY",
+    "prime": "${result.prime}",
+    "amount": "1",
+    "merchant_id": "YOUR_MERCHANT",
+    "details": "Some item",
+    "cardholder": {
+        "phone_number": "+886923456789",
+        "name": "王小明",
+        "email": "LittleMing@Wang.com",
+        "zip_code": "100",
+        "address": "台北市天龍區芝麻街1號1樓",
+        "national_id": "A123456789"
+    },
+    "result_url": {
+        "frontend_redirect_url": "https://your.server.com/notify",
+        "backend_notify_url": "https://your.server.com/notify"
+    }
+}'`
+            $("#curl").html(command)
+
         })
     })
 </script>
