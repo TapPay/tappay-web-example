@@ -1,7 +1,7 @@
 # TapPay Fields
 
 ## DEMO
-<img src="./TapPay_Field.gif" width="600">
+![](https://media.giphy.com/media/3oxHQiXcFfQBN1EDTy/giphy.gif)
 
 ## Overview
 1. 設定三個 tappay field container
