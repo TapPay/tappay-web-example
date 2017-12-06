@@ -1,7 +1,7 @@
 # Line Pay with TapPay
 
 ## DEMO
-![](https://media.giphy.com/media/3oxHQgbrhUwaba5FnO/giphy.gif)
+<img src="./line_pay_get_prime.gif" style="width: 600px">
 
 ## Required
 1. 請搭配 web SDk v2.3.3 使用 Line Pay, 舊版本不支援 Line Pay
