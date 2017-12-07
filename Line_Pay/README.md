@@ -1,31 +1,40 @@
 # Line Pay with TapPay
 
 ## DEMO
+
 <img src="./line_pay_get_prime.gif" style="width: 600px">
 
 ## Required
+
 1. 請搭配 web SDk v2.3.3 使用 Line Pay, 舊版本不支援 Line Pay
 
 ## Overview
+
 1. 前端用 `TPDirect.linePay.getPrime()` 拿到 line pay 專屬的 `prime`
 2. 前端把 `prime` 送到後端伺服器
 3. 前端等待後端伺服器回傳 `payment_url` 並使用 `TPDirect.redirect(payment_url)` 的方式讓使用者進行 line pay 付款
 
 
 ## 教學
+
 ### Step 1
+
 首先我們要建立出付款頁面 `index.html` 並且在 `<head></head>` 中引入 SDK
+
 ```html
 <script src="https://js.tappaysdk.com/tpdirect/v2_3_3"></script>
 ```
 
 ### Step 2
+
 初始化 TapPay SDK
+
 ```js
 TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
 ```
 
 ### Step 3
+
 使用 `TPDirect.linePay.getPrime(callback)` 去拿 `prime`
 
 ```js
@@ -33,6 +42,7 @@ TPDirect.linePay.getPrime(function(result) {
     // code
 })
 ```
+
 result 的資料格式為
 
 名稱 | 型別 | 內容
@@ -43,8 +53,8 @@ prime | String | prime 字串 `ln_` 開頭，於 <a href="https://docs.tappaysdk
 clientip | String | 交易者的 IP 位置
 
 ### Step 4
-等待後端伺服器回傳 `payment_url`，然後請使用 `TapPay.redirect(payment_url)` 跳轉
 
+等待後端伺服器回傳 `payment_url`，然後請使用 `TapPay.redirect(payment_url)` 跳轉
 
 ### 完整 index.html 頁面
 

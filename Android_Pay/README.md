@@ -18,6 +18,7 @@
 ## 教學
 
 ### Step 1
+
 初始化 SDK
 
 ```javascript
@@ -28,13 +29,17 @@
 ```
 
 ### Step 2
+
 初始化 Android Pay
+
 ```javascript
 TPDirect.paymentRequestApi.setupAndroidPay(androidPayPublicKey, androidPayMerchantId)
 ```
 
 ### Step 3
+
 檢查裝置是否可以使用 Payment Request API
+
 ```javascript
 if (TPDirect.paymentRequestApi.checkAvailability()) {
     // code, do somethig if the divce is compatiable with Payment Request API
@@ -42,7 +47,9 @@ if (TPDirect.paymentRequestApi.checkAvailability()) {
 ```
 
 ### Step 4
+
 建立 Payment Request Data
+
 ```javascript
 var paymentRequest = {
     // 設定支援的卡別, 付款方式
@@ -85,7 +92,9 @@ var paymentRequest = {
 ```
 
 ### Step 5
+
 設置 `getPrimeCallback` 方法, 詳細請看 [TapPay Docs](https://docs.tappaysdk.com/android-pay/zh/front.html#response) 回傳結果
+
 ```javascript
 function getPrimeCallback(result) {
     // result from tappay server
@@ -93,7 +102,9 @@ function getPrimeCallback(result) {
 ```
 
 ### Step 6
+
 全部都完成後使用 `TPDirect.paymentRequestApi.getPrime(getPrimeCallback)` 啟動 Android Pay
 
 ## 完整 index.html 頁面
+
 [TapPay Android Pay Example](./example/index.html)

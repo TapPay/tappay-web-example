@@ -1,13 +1,16 @@
 # Apple Pay with TapPay
 
 ## DEMO
+
 ![](https://media.giphy.com/media/3ohs82eiyMwU3A9gli/giphy.gif)
 
 ## Required
+
 1. 準備好一個 https 的網站，才能去驗證 Domain，可以利用 ngrok 去建立 public domain 並且去驗證，詳細教學可以參考 [Ngrok - Connect to your localhost](https://medium.com/tappay/ngrok-connect-to-your-localhost-c6f3ba84525b)
 2. 請先到 TapPay Portal & Apple Develop 去設定好 Merchant ID 以及 Domain，詳細設定方式可以參考 [TapPay Apple Pay 文件](https://docs.tappaysdk.com/apple-pay/zh/portal.html#apple-developer-add-domain-apple-pay-on-the-web)
 
 ### Overview
+
 1. 引入 SDK 並且設置好 APP_ID, APP_KEY, SERVER_TYPE
 2. 使用 `TPDirect.applePay.checkAvailability()` 確認裝置是否能使用 Apple Pay
 3. 設置 Payment Request Data For Apple Pay
@@ -17,20 +20,26 @@
 7. 全部都準備完畢之後, 使用 `session.begin()` 啟動 Apple Pay 並且去 TapPay Server Get Prime
 
 ## 教學
+
 ### Step 1
 首先我們要建立出付款頁面 `index.html` 並且在 `<head></head>` 中引入 SDK
+
 ```html
 <script src="https://js.tappaysdk.com/tpdirect/v2_3_3"></script>
 ```
 
 ### Step 2
+
 初始化 TapPay SDK
+
 ```javascript
 TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
 ```
 
 ### Step 3
+
 使用 `TPDirect.applePay.checkAvailability()` 確認裝置是否能使用 Apple Pay
+
 ```javascript
 if (TPDirect.applePay.checkAvailability()) {
     // code, do something if the device is compatible with Apple Pay
@@ -38,7 +47,9 @@ if (TPDirect.applePay.checkAvailability()) {
 ```
 
 ### Step 4
+
 設置 payment request for Apple Pay，詳細可以參考 [Apple Pay Payment Request Data](https://docs.tappaysdk.com/apple-pay/zh/front.html#payment-request)
+
 ```javascript
 var paymentRequest = {
     countryCode: 'TW',
@@ -77,7 +88,9 @@ var paymentRequest = {
 ```
 
 ### Step 5
+
 設置好 Get Prime SuccuessCallback & ErrorCallback
+
 ```javascript
 function getPrimeSuccessCallback(prime, event, completePayment) {
     // 1. prime
@@ -102,14 +115,18 @@ function ErrorCallback(error) {
 ```
 
 ### Step 6
+
 設置 Apple Pay Mechant ID，詳細設定步驟請到 [TapPay Apple Pay 文件](https://docs.tappaysdk.com/apple-pay/zh/portal.html#apple-developer-add-domain-apple-pay-on-the-web)
+
 ```javascript
 // ==>136 in sample code|
 var session = TPDirect.applePay.buildSession(paymentRequest, "您的 Apple Merchant ID", getPrimeSuccessCallback, getPrimeErrorCallback);
 ```
 
 ### Step 7
+
 設置好 `onshippingmethodselected`
+
 ```javascript
 session.onshippingmethodselected = function (event) {
     const total = {
@@ -130,6 +147,7 @@ session.onshippingmethodselected = function (event) {
 ```
 
 ### Step 8
+
 設置好所有 function 後, 使用 `session.begin()` 啟用 Apple Pay
 
 ### 完整 index.html 頁面

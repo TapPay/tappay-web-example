@@ -1,9 +1,11 @@
 # TapPay Fields
 
 ## DEMO
+
 ![](https://media.giphy.com/media/3oxHQiXcFfQBN1EDTy/giphy.gif)
 
 ## Overview
+
 1. 設定三個 tappay field container
 2. 利用 TPDirect.setupSDK 設定參數
 3. 使用 TPDirect.card.setup 設定外觀
@@ -28,6 +30,7 @@
 <div class="tpfield" id="card-expiration-date"></div>
 <div class="tpfield" id="card-ccv"></div>
 ```
+
 ## 2. Setup SDK 
 
 ```js
@@ -115,7 +118,6 @@ hasError (boolean) | true = 任何欄位有錯誤
 status.number (int) | 回傳的 status code 請參考 [reference](https://docs.tappaysdk.com/reference.html#status-code "status code")
 status.expiry (int) | 回傳的 status code 請參考 [reference](https://docs.tappaysdk.com/reference.html#status-code "status code")
 status.cvc (int) | 回傳的 status code 請參考 [reference](https://docs.tappaysdk.com/reference.html#status-code "status code")
-
 
 ```javascript
 TPDirect.card.onUpdate(function (update) {
