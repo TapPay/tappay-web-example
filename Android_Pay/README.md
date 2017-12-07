@@ -5,9 +5,11 @@
 
 ## Required
 1. TapPay SDK 2.3.3 
-2. 請到 TapPay Portal 申請 Android Pay 用的 `androidPayPublicKey` 和 `androidPayMerchantId`
+2. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
+3. 請到 TapPay Portal 申請 Android Pay 用的 `androidPayPublicKey` 和 `androidPayMerchantId`
 
 ## Overview
+
 1. 引入 SDK 並且設置好 APP_ID, APP_KEY, SERVER_TYPE
 2. 使用 `TPDirect.paymentRequestApi.setupAndroidPay(androidPayPublicKey, androidPayMerchantId)` 初始化 Android Pay
 3. 使用 `TPDirect.paymentRequestApi.checkAvailability()` 確認裝置是否能使用 Payment Request API

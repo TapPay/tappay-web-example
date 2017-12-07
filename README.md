@@ -10,6 +10,10 @@
 5. Line Pay
 6. Payment Request API
 
+## Direct Pay - iframe
+
+由 TapPay 幫您製作好表單，簡單操作好上手，詳細供譨以及使用方式請詳見 [Direct Pay - iframe](./Direct_Pay_iframe) 的頁面
+
 ## Direct Pay - TapPay Fields
 
 提供讓您客製化表單的功能，詳細的功能以及使用方式請詳見 [Direct Pay - TapPay Fields](./TapPay_Fields) 的頁面

@@ -7,6 +7,7 @@
 ## Required
 
 1. 請搭配 web SDk v2.3.3 使用 Line Pay, 舊版本不支援 Line Pay
+2. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
 
 ## Overview
 

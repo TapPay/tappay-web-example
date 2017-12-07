@@ -2,11 +2,11 @@
 
 ## DEMO
 
-![](https://media.giphy.com/media/3oxHQk8dTxGiyXatRm/giphy.gif)
+<img src="https://media.giphy.com/media/3oxHQk8dTxGiyXatRm/giphy.gif" width="400px">
 
 ## Required
 
-1. 請先到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
+1. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
 
 ## Overview
 

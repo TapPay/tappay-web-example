@@ -6,8 +6,9 @@
 
 ## Required
 
-1. 準備好一個 https 的網站，才能去驗證 Domain，可以利用 ngrok 去建立 public domain 並且去驗證，詳細教學可以參考 [Ngrok - Connect to your localhost](https://medium.com/tappay/ngrok-connect-to-your-localhost-c6f3ba84525b)
-2. 請先到 TapPay Portal & Apple Develop 去設定好 Merchant ID 以及 Domain，詳細設定方式可以參考 [TapPay Apple Pay 文件](https://docs.tappaysdk.com/apple-pay/zh/portal.html#apple-developer-add-domain-apple-pay-on-the-web)
+1. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
+2. 準備好一個 https 的網站，才能去驗證 Domain，可以利用 ngrok 去建立 public domain 並且去驗證，詳細教學可以參考 [Ngrok - Connect to your localhost](https://medium.com/tappay/ngrok-connect-to-your-localhost-c6f3ba84525b)
+3. 請先到 TapPay Portal & Apple Develop 去設定好 Merchant ID 以及 Domain，詳細設定方式可以參考 [TapPay Apple Pay 文件](https://docs.tappaysdk.com/apple-pay/zh/portal.html#apple-developer-add-domain-apple-pay-on-the-web)
 
 ### Overview
 
