@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v2_3_3"></script>
+    <title>Direct Pay - iframe</title>
+    <script>
+        TPDirect.setupSDK(APP_ID, "APP_KEY", "SERVER_TYPE")
+    </script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div class="ui grid centered doubling stackable">
+        <div class="six wide column">
+            <div class="ui segment">
+                <div id="tappay-iframe">
+                </div>
+                <div class="ui button" id="submit">Get Prime</div>
+                <pre class="ui error message" id="message" style="overflow-x: auto">
+                </pre>
+                <pre class="ui info message" id="result" style="overflow-x: auto">
+                </pre>
+                <pre class="ui info message" id="curl" style="overflow-x: auto">
+                </pre>
+            </div>
+        </div>
+    </div>
+    <script>
+        var statusTable = {
+            '0': '欄位已填好，並且沒有問題',
+            '1': '欄位還沒有填寫',
+            '2': '欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor',
+            '3': '使用者正在輸入中',
+        }
+        var defaultCardViewStyle = {
+            color: 'rgb(0,0,0)',
+            fontSize: '15px',
+            lineHeight: '24px',
+            fontWeight: '300',
+            errorColor: 'red',
+            placeholderColor: ''
+        }
+        TPDirect.card.setup('#tappay-iframe', defaultCardViewStyle)
+        TPDirect.card.onUpdate(function (update) {
+
+            var submitButton = document.querySelector('#submit')
+            var cardViewContainer = document.querySelector('#tappay-iframe')
+
+            if (update.canGetPrime) {
+                submitButton.removeAttribute('disabled')
+            } else {
+                submitButton.setAttribute('disabled', true)
+            }
+
+            var message = document.querySelector('#message')
+
+            message.innerHTML = `
+                canGetPrime: ${update.canGetPrime} \n
+                cardNumberStatus: ${statusTable[update.status.number]} \n
+                cardExpiryStatus: ${statusTable[update.status.expiry]} \n
+                cvcStatus: ${statusTable[update.status.cvc]}
+            `.replace(/    /g, '')
+
+            if (update.hasError) {
+                message.classList.add('error')
+                message.classList.remove('info')
+            } else {
+                message.classList.remove('error')
+                message.classList.add('info')
+            }
+        })
+        document.querySelector('#submit').addEventListener('click', function(event) {
+            TPDirect.card.getPrime(function(result) {
+                document.querySelector('#result').innerHTML  = JSON.stringify(result, null, 4)
+
+                var command = `
+                Use following command to send to server \n\n
+                curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+                -H 'content-type: application/json' \\
+                -H 'x-api-key: YOUR_PARTNER_KEY' \\
+                -d '{
+                    "partner_key": "YOUR_PARTNER_KEY",
+                    "prime": "${result.card.prime}",
+                    "amount": "1",
+                    "merchant_id": "YOUR_MERCHANT",
+                    "details": "Some item",
+                    "cardholder": {
+                        "phone_number": "+886923456789",
+                        "name": "王小明",
+                        "email": "LittleMing@Wang.com",
+                        "zip_code": "100",
+                        "address": "台北市天龍區芝麻街1號1樓",
+                        "national_id": "A123456789"
+                    }
+                }'`.replace(/                /g, '')
+
+                document.querySelector('#curl').innerHTML = command
+            })
+        })
+    </script>
+</body>
+
+</html>
