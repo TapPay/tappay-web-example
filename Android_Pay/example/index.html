@@ -1,0 +1,141 @@
+<html>
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+            <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+            <script src="https://js.tappaysdk.com/tpdirect/v2_3_3"></script>
+        
+            <title>Android Pay Example</title>
+            <style>
+                .ui.meesage {
+                    transition: all .5s ease
+                }
+            </style>
+        </head>
+        
+        <body>
+            <div class="ui grid centered stackable">
+                <div class="ten wide column">
+                    <br>
+                    <br>
+                    <form class="ui form">
+                        <img src="./btn.png" alt="" class="ui centered medium image" id="pay" style="cursor: pointer">
+                    </form>
+                    <div class="ui info message hidden result1">
+                        <div class="ui header">Get Prime Result</div>
+                        <pre class="content" id="result1" style="overflow-x: auto"></pre>
+                        <pre id="curl" style="overflow-x: auto"></pre>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // APP ID 和 APP Key 請到 Portal 的 應用程式頁面上面申請, 並且填入
+                // SERVER_TYPE 為 'sandbox' or 'production'
+                TPDirect.setupSDK(APP_ID, "APP_KEY", "SERVER_TYPE")
+        
+                document.addEventListener('DOMContentLoaded', () => {
+        
+                    if (TPDirect.paymentRequestApi.checkAvailability()) {
+        
+                        // 初始化 Android Pay 環境
+                        // Public Key 和 Merchant ID 請到 Portal 的 Android Pay 頁面上面申請, 並且填入
+                        var ANDROID_PAY_PUBLICKEY = "Public_Key_From_Portal_In_the_Android_Pay_Page";
+                        var ANDROID_PAY_MERCHANT_ID = "Merchant_ID_From_Portal_In_the_Android_Pay_Page";
+                        TPDirect.paymentRequestApi.setupAndroidPay(ANDROID_PAY_PUBLICKEY, ANDROID_PAY_MERCHANT_ID)
+        
+                        document.getElementById('pay').style.display = 'inline-block';
+        
+                        var data = {
+                            // 支援的卡別, 請務必使用大寫
+                            supportedNetworks: ['AMEX', 'MASTERCARD', 'VISA'],
+                            // 支援的付款方式, basic-card 為一般卡別付款, https://android.com/pay 為 Android Pay 付款
+                            supportedMethods: ['basic-card', 'https://android.com/pay'],
+        
+                            displayItems: [{
+                                label: 'TapPay - iPhone8',
+                                amount: {
+                                    currency: 'TWD',
+                                    value: '1.00'
+                                }
+                            }],
+                            total: {
+                                label: '付給 TapPay',
+                                amount: {
+                                    currency: 'TWD',
+                                    value: '1.00'
+                                }
+                            },
+                            shippingOptions: [{
+                                    id: "standard",
+                                    label: "🚛 Ground Shipping (2 days)",
+                                    amount: {
+                                        currency: "TWD",
+                                        value: "5.00"
+                                    }
+                                },
+                                {
+                                    id: "drone",
+                                    label: "🚀 Drone Express (2 hours)",
+                                    amount: {
+                                        currency: "TWD",
+                                        value: "25.00"
+                                    }
+                                }
+                            ],
+                            // optional
+                            // 設成 ture 的話, Payment Request 會要求使用者填寫資料
+                            options: {
+                                // 付款人的信箱
+                                requestPayerEmail: false,
+                                // 付款人的姓名
+                                requestPayerName: false,
+                                // 付款人的電話
+                                requestPayerPhone: false,
+                                // 付款人的運送地址
+                                requestShipping: false,
+                            }
+                        }
+        
+                        TPDirect.paymentRequestApi.setupPaymentRequest(data)
+        
+                        var button = document.querySelector('#pay');
+                        button.addEventListener('click', function (event) {
+                            TPDirect.paymentRequestApi.getPrime(handlePayByPrime)
+                        })
+                    }
+        
+                });
+        
+                function handlePayByPrime(result) {
+                    alert(JSON.stringify(result, null, 4))
+                    document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
+                    document.querySelector('.result1').classList.remove('hidden')
+var command = `Use following command to send to server \n\n
+curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+-H 'content-type: application/json' \\
+-H 'x-api-key: YOUR_PARTNER_KEY' \\
+-d '{
+    "partner_key": "YOUR_PARTNER_KEY",
+    "prime": "${result.prime}",
+    "amount": "1",
+    "merchant_id": "YOUR_MERCHANT",
+    "details": "Some item",
+    "cardholder": {
+        "phone_number": "+886923456789",
+        "name": "王小明",
+        "email": "LittleMing@Wang.com",
+        "zip_code": "100",
+        "address": "台北市天龍區芝麻街1號1樓",
+        "national_id": "A123456789"
+    }
+}'`
+
+                $("#curl").html(command)
+                }
+        
+            </script>
+        </body>
+        
+        </html>

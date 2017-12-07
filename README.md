@@ -16,3 +16,6 @@
 
 ## Apple Pay
 提供 Apple Pay 服務，，詳細的功能以及使用方式請詳見 [Apple Pay](./Apple_Pay) 的頁面
+
+## Android Pay
+提供 Android Pay on the Web 服務，，詳細的功能以及使用方式請詳見 [Android Pay](./Android_Pay) 的頁面
