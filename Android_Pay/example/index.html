@@ -33,7 +33,7 @@
             <script>
                 // APP ID 和 APP Key 請到 Portal 的 應用程式頁面上面申請, 並且填入
                 // SERVER_TYPE 為 'sandbox' or 'production'
-                TPDirect.setupSDK(APP_ID, "APP_KEY", "SERVER_TYPE")
+                TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
         
                 document.addEventListener('DOMContentLoaded', () => {
         
@@ -41,11 +41,9 @@
         
                         // 初始化 Android Pay 環境
                         // Public Key 和 Merchant ID 請到 Portal 的 Android Pay 頁面上面申請, 並且填入
-                        var ANDROID_PAY_PUBLICKEY = "Public_Key_From_Portal_In_the_Android_Pay_Page";
-                        var ANDROID_PAY_MERCHANT_ID = "Merchant_ID_From_Portal_In_the_Android_Pay_Page";
+                        var ANDROID_PAY_PUBLICKEY = "BBAcq2aRuFcmOcXsnXYL5Lp7ziVxKJRFT+/gzjclfzClqAKmKfnrRSXAOk6uoQtAMx/Fkg96anT0u/SqsvrPiyI=";
+                        var ANDROID_PAY_MERCHANT_ID = "gh-androidpayexample";
                         TPDirect.paymentRequestApi.setupAndroidPay(ANDROID_PAY_PUBLICKEY, ANDROID_PAY_MERCHANT_ID)
-        
-                        document.getElementById('pay').style.display = 'inline-block';
         
                         var data = {
                             // 支援的卡別, 請務必使用大寫
@@ -112,25 +110,26 @@
                     alert(JSON.stringify(result, null, 4))
                     document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
                     document.querySelector('.result1').classList.remove('hidden')
-var command = `Use following command to send to server \n\n
-curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
--H 'content-type: application/json' \\
--H 'x-api-key: YOUR_PARTNER_KEY' \\
--d '{
-    "partner_key": "YOUR_PARTNER_KEY",
-    "prime": "${result.prime}",
-    "amount": "1",
-    "merchant_id": "YOUR_MERCHANT",
-    "details": "Some item",
-    "cardholder": {
-        "phone_number": "+886923456789",
-        "name": "王小明",
-        "email": "LittleMing@Wang.com",
-        "zip_code": "100",
-        "address": "台北市天龍區芝麻街1號1樓",
-        "national_id": "A123456789"
-    }
-}'`
+                    var command = `
+                    Use following command to send to server \n\n
+                    curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+                    -H 'content-type: application/json' \\
+                    -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
+                    -d '{
+                        "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
+                        "prime": "${result.prime}",
+                        "amount": "1",
+                        "merchant_id": "GlobalTesting_CTBC",
+                        "details": "Some item",
+                        "cardholder": {
+                            "phone_number": "+886923456789",
+                            "name": "王小明",
+                            "email": "LittleMing@Wang.com",
+                            "zip_code": "100",
+                            "address": "台北市天龍區芝麻街1號1樓",
+                            "national_id": "A123456789"
+                        }
+                    }'`.replace(/                /g, '')
 
                 $("#curl").html(command)
                 }
