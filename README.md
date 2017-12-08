@@ -36,4 +36,5 @@
 
 ## Line Pay
 
-提供 Line Pay 服務，詳細的功能以及使用方式請詳見 [Line Pay](./Line_Pay) 的頁面
+提供 Line Pay 服務，詳細的功能以及使用方式請詳見 [Line Pay](./Line_Pay) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Line_Pay/example/index.html) 頁面試試 Get Prime !
