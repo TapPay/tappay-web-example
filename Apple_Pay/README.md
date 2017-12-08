@@ -12,10 +12,10 @@
 
 ### Overview
 
-1. 引入 SDK 並且設置好 APP_ID, APP_KEY, SERVER_TYPE
+1. 引入 SDK 並且初始化 APP_ID, APP_KEY, SERVER_TYPE
 2. 使用 `TPDirect.applePay.checkAvailability()` 確認裝置是否能使用 Apple Pay
 3. 設置 Payment Request Data For Apple Pay
-4. 設置 `getPrimeSuccessCallback()` & `gertPrimeErrorCallback()`
+4. 設置 `getPrimeSuccessCallback()` & `gertPrimeErrorCallback()`, 並根據成功或失敗的狀況要呼叫 `completePayment(ApplePaySession.STATUS_SUCCESS)` 或是 `completePayment(ApplePaySession.STATUS_FAILURE)`
 5. 設置 Apple Pay Mertchant ID
 6. 設置 `session.onshippingmethodselected` 方法
 7. 全部都準備完畢之後, 使用 `session.begin()` 啟動 Apple Pay 並且去 TapPay Server Get Prime
@@ -27,17 +27,12 @@
 
 ```html
 <script src="https://js.tappaysdk.com/tpdirect/v2_3_3"></script>
+<script>
+    TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
+</script>
 ```
 
 ### Step 2
-
-初始化 TapPay SDK
-
-```javascript
-TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
-```
-
-### Step 3
 
 使用 `TPDirect.applePay.checkAvailability()` 確認裝置是否能使用 Apple Pay
 
@@ -47,7 +42,7 @@ if (TPDirect.applePay.checkAvailability()) {
 }
 ```
 
-### Step 4
+### Step 3
 
 設置 payment request for Apple Pay，詳細可以參考 [Apple Pay Payment Request Data](https://docs.tappaysdk.com/apple-pay/zh/front.html#payment-request)
 
@@ -88,9 +83,10 @@ var paymentRequest = {
 };
 ```
 
-### Step 5
+### Step 4
 
 設置好 Get Prime SuccuessCallback & ErrorCallback
+根據成功或失敗的狀況要呼叫 `completePayment(ApplePaySession.STATUS_SUCCESS)` 或是 `completePayment(ApplePaySession.STATUS_FAILURE)`
 
 ```javascript
 function getPrimeSuccessCallback(prime, event, completePayment) {
@@ -115,7 +111,7 @@ function ErrorCallback(error) {
 }
 ```
 
-### Step 6
+### Step 5
 
 設置 Apple Pay Mechant ID，詳細設定步驟請到 [TapPay Apple Pay 文件](https://docs.tappaysdk.com/apple-pay/zh/portal.html#apple-developer-add-domain-apple-pay-on-the-web)
 
@@ -124,7 +120,7 @@ function ErrorCallback(error) {
 var session = TPDirect.applePay.buildSession(paymentRequest, "您的 Apple Merchant ID", getPrimeSuccessCallback, getPrimeErrorCallback);
 ```
 
-### Step 7
+### Step 6
 
 設置好 `onshippingmethodselected`
 
@@ -147,7 +143,7 @@ session.onshippingmethodselected = function (event) {
 }
 ```
 
-### Step 8
+### Step 7
 
 設置好所有 function 後, 使用 `session.begin()` 啟用 Apple Pay
 

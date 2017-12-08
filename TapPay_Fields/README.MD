@@ -2,7 +2,7 @@
 
 ## DEMO
 
-![](https://media.giphy.com/media/3oxHQiXcFfQBN1EDTy/giphy.gif)
+<img src="./TapPay_Field.gif">
 
 ## Overview
 
