@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+
+    <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="images/touch-icon-167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/touch-icon-180.png">
+    
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v3"></script>
+
+    <title>Android Pay PaymentRequest Example</title>
+    <style>
+        .ui.meesage {
+            transition: all .5s ease
+        }
+        .apple-pay-button {
+            -webkit-appearance: -apple-pay-button;
+            width: 200px;
+            min-height: 30px;
+            border: 1px solid black;
+            background-image: -webkit-named-image(apple-pay-logo-black);
+            background-size: 100% calc(60% + 2px);
+            background-repeat: no-repeat;
+            background-color: white;
+            background-position: 50% 50%;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px auto;
+            transition: background-color .15s;
+        }
+        .apple-pay-button.buy {
+            /* plain, buy, set-up, donate */
+            -apple-pay-button-type: buy; 
+        }
+        .apple-pay-button.set-up {
+            -apple-pay-button-type: set-up; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ui grid centered stackable">
+        <div class="row"></div>
+        <div class="row"></div>
+        <br>
+        <br>
+        <div class="three wide column">
+            <button id="pay" style="display: none; position: relative;height: 100%;top: 0;left: 0;width: 100%;z-index: 1;background: #fff;color: #fff;box-shadow: 0px 1px 3px rgb(116,116,116);min-height: 32px;max-height: 64px;padding: 0;border-radius: 4px;border: none;outline: none;-webkit-tap-highlight-color: transparent;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;white-space: nowrap;font: 500 16px/21px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;font-weight: 500;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;">
+                <div style="display: flex;justify-content: center;color: rgb(61,64,67);padding: 10px;">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IgogICAgIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIKICAgICB2aWV3Qm94PSIwIDAgNDggNDgiCiAgICAgc3R5bGU9IjtmaWxsOiMwMDAwMDA7IgogICAgIGNsYXNzPSJpY29uIGljb25zOC1nb29nbGUiPjxnIGlkPSJzdXJmYWNlMSI+PHBhdGggc3R5bGU9IiBmaWxsOiNGRkMxMDc7IiBkPSJNIDQzLjYwOTM3NSAyMC4wODIwMzEgTCA0MiAyMC4wODIwMzEgTCA0MiAyMCBMIDI0IDIwIEwgMjQgMjggTCAzNS4zMDQ2ODggMjggQyAzMy42NTIzNDQgMzIuNjU2MjUgMjkuMjIyNjU2IDM2IDI0IDM2IEMgMTcuMzcxMDk0IDM2IDEyIDMwLjYyODkwNiAxMiAyNCBDIDEyIDE3LjM3MTA5NCAxNy4zNzEwOTQgMTIgMjQgMTIgQyAyNy4wNTg1OTQgMTIgMjkuODQzNzUgMTMuMTUyMzQ0IDMxLjk2MDkzOCAxNS4wMzkwNjMgTCAzNy42MTcxODggOS4zODI4MTMgQyAzNC4wNDY4NzUgNi4wNTQ2ODggMjkuMjY5NTMxIDQgMjQgNCBDIDEyLjk1MzEyNSA0IDQgMTIuOTUzMTI1IDQgMjQgQyA0IDM1LjA0Njg3NSAxMi45NTMxMjUgNDQgMjQgNDQgQyAzNS4wNDY4NzUgNDQgNDQgMzUuMDQ2ODc1IDQ0IDI0IEMgNDQgMjIuNjYwMTU2IDQzLjg2MzI4MSAyMS4zNTE1NjMgNDMuNjA5Mzc1IDIwLjA4MjAzMSBaICI+PC9wYXRoPjxwYXRoIHN0eWxlPSIgZmlsbDojRkYzRDAwOyIgZD0iTSA2LjMwNDY4OCAxNC42OTE0MDYgTCAxMi44Nzg5MDYgMTkuNTExNzE5IEMgMTQuNjU2MjUgMTUuMTA5Mzc1IDE4Ljk2MDkzOCAxMiAyNCAxMiBDIDI3LjA1ODU5NCAxMiAyOS44NDM3NSAxMy4xNTIzNDQgMzEuOTYwOTM4IDE1LjAzOTA2MyBMIDM3LjYxNzE4OCA5LjM4MjgxMyBDIDM0LjA0Njg3NSA2LjA1NDY4OCAyOS4yNjk1MzEgNCAyNCA0IEMgMTYuMzE2NDA2IDQgOS42NTYyNSA4LjMzNTkzOCA2LjMwNDY4OCAxNC42OTE0MDYgWiAiPjwvcGF0aD48cGF0aCBzdHlsZT0iIGZpbGw6IzRDQUY1MDsiIGQ9Ik0gMjQgNDQgQyAyOS4xNjQwNjMgNDQgMzMuODU5Mzc1IDQyLjAyMzQzOCAzNy40MTAxNTYgMzguODA4NTk0IEwgMzEuMjE4NzUgMzMuNTcwMzEzIEMgMjkuMjEwOTM4IDM1LjA4OTg0NCAyNi43MTQ4NDQgMzYgMjQgMzYgQyAxOC43OTY4NzUgMzYgMTQuMzgyODEzIDMyLjY4MzU5NCAxMi43MTg3NSAyOC4wNTQ2ODggTCA2LjE5NTMxMyAzMy4wNzgxMjUgQyA5LjUwMzkwNiAzOS41NTQ2ODggMTYuMjI2NTYzIDQ0IDI0IDQ0IFogIj48L3BhdGg+PHBhdGggc3R5bGU9IiBmaWxsOiMxOTc2RDI7IiBkPSJNIDQzLjYwOTM3NSAyMC4wODIwMzEgTCA0MiAyMC4wODIwMzEgTCA0MiAyMCBMIDI0IDIwIEwgMjQgMjggTCAzNS4zMDQ2ODggMjggQyAzNC41MTE3MTkgMzAuMjM4MjgxIDMzLjA3MDMxMyAzMi4xNjQwNjMgMzEuMjE0ODQ0IDMzLjU3MDMxMyBDIDMxLjIxODc1IDMzLjU3MDMxMyAzMS4yMTg3NSAzMy41NzAzMTMgMzEuMjE4NzUgMzMuNTcwMzEzIEwgMzcuNDEwMTU2IDM4LjgwODU5NCBDIDM2Ljk3MjY1NiAzOS4yMDMxMjUgNDQgMzQgNDQgMjQgQyA0NCAyMi42NjAxNTYgNDMuODYzMjgxIDIxLjM1MTU2MyA0My42MDkzNzUgMjAuMDgyMDMxIFogIj48L3BhdGg+PC9nPjwvc3ZnPg==" style="width: 20px; height: 20px; margin-right: 5px;"><span>Pay With Google</span></div>
+            </button>
+        </div>
+        <div class="fourteen wide column">
+            <div class="ui info message support">
+                <div class="ui header">裝置支援：</div>
+                <pre class="content" id="support">檢查中...</pre>
+            </div>
+            
+            <div class="ui info message hidden result1">
+                <div class="ui header">Get Prime Result</div>
+                <pre class="content" id="result1" style="overflow-x: auto;"></pre>
+            </div>
+            <div class="ui success message hidden curl">
+                <div class="ui header">Pay Result</div>
+                <pre class="content" id="curl" style="overflow-x: auto;"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v3"></script>
+
+    <title>Android Pay PaymentRequest Example</title>
+    <style>
+        .ui.meesage {
+            transition: all .5s ease
+        }
+        .apple-pay-button {
+            -webkit-appearance: -apple-pay-button;
+            width: 200px;
+            min-height: 30px;
+            border: 1px solid black;
+            background-image: -webkit-named-image(apple-pay-logo-black);
+            background-size: 100% calc(60% + 2px);
+            background-repeat: no-repeat;
+            background-color: white;
+            background-position: 50% 50%;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px auto;
+            transition: background-color .15s;
+        }
+        .apple-pay-button.buy {
+            /* plain, buy, set-up, donate */
+            -apple-pay-button-type: buy; 
+        }
+        .apple-pay-button.set-up {
+            -apple-pay-button-type: set-up; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ui grid centered stackable">
+        <div class="fourteen wide column">
+            <form class="ui form">
+
+                <!-- apple pay -->
+                <div id="apple-pay" class="apple-pay-button" style="display: none;"></div>
+                <!-- payment request -->
+                <button id="pay" type="button" class="ui medium button" style="display: none;">Pay By Prime</button>
+            
+            </form>
+
+            <div class="ui info message support">
+                <div class="ui header">裝置支援：</div>
+                <pre class="content" id="support">檢查中...</pre>
+            </div>
+            
+            <div class="ui info message hidden result1">
+                <div class="ui header">Get Prime Result</div>
+                <pre class="content" id="result1" style="overflow-x: auto;"></pre>
+            </div>
+            <div class="ui info message hidden curl">
+                <div class="ui header">Use following data to send to server</div>
+                <pre class="content" id="curl" style="overflow-x: auto;"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

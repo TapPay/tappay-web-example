@@ -3,6 +3,11 @@
 ## DEMO
 <img src="./android_pay_get_prime.gif" width="300px"/>
 
+## 注意事項
+Google 已建議使用 [Pay with Google](../Payment_Request/Pay_with_Google)  
+Google 將不再繼續接受新版 Android Pay 串接，但是可以使用 Google 的新產品『Pay with Google』   
+如果已經有 Android Pay 串接功能，TapPay 還是會繼續支援，但強烈建議換成 Pay with Google  
+
 ## Required
 1. TapPay SDK 2.3.3 
 2. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
@@ -35,7 +40,9 @@
 初始化 Android Pay
 
 ```javascript
-TPDirect.paymentRequestApi.setupAndroidPay(androidPayPublicKey, androidPayMerchantId)
+var ANDROID_PAY_PUBLICKEY = "BBAcq2aRuFcmOcXsnXYL5Lp7ziVxKJRFT+/gzjclfzClqAKmKfnrRSXAOk6uoQtAMx/Fkg96anT0u/SqsvrPiyI=";
+var ANDROID_PAY_MERCHANT_ID = "gh-androidpayexample";
+TPDirect.paymentRequestApi.setupAndroidPay(ANDROID_PAY_PUBLICKEY, ANDROID_PAY_MERCHANT_ID)
 ```
 
 ### Step 3

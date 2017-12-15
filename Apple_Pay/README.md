@@ -1,5 +1,8 @@
 # Apple Pay with TapPay
 
+TapPay 也提供了可以使用 Payment Request API 去使用 Apple Pay  
+詳細請看 [Payment Request API - Apple Pay](../Payment_Request/Apple_Pay) 的教學頁面
+
 ## DEMO
 
 ![](https://media.giphy.com/media/3ohs82eiyMwU3A9gli/giphy.gif)
@@ -149,4 +152,4 @@ session.onshippingmethodselected = function (event) {
 
 ### 完整 index.html 頁面
 
-[TapPay Apple Pay Example](./example/public/index.html)
+[TapPay Apple Pay Example](./example/index.html)

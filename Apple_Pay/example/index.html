@@ -14,7 +14,7 @@
 
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-    <script src="https://js.tappaysdk.com/tpdirect/v2_3_3"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v3"></script>
     <script>
         TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
     </script>
@@ -146,6 +146,8 @@
                 }, null, 4))
             }
 
+            // merchant.tech.cherri.global.test 是 DEMO 頁面專門使用的 merchant id
+            // 如果要在自己頁面上使用 Apple Pay 請參考 Required 去申請 Apple Pay merchant id
             const session = TPDirect.applePay.buildSession(paymentRequest, "merchant.tech.cherri.global.test",
                 getPrimeSuccessCallback, getPrimeErrorCallback);
 
