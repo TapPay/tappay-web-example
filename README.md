@@ -24,6 +24,11 @@
 提供讓您客製化表單的功能，詳細的功能以及使用方式請詳見 [Direct Pay - TapPay Fields](./TapPay_Fields) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/TapPay_Fields/example/index.html) 頁面試試 Get Prime !
 
+## Apple Pay
+
+提供 Apple Pay 服務，詳細的功能以及使用方式請詳見 [Apple Pay](./Apple_Pay) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Apple_Pay/example/index.html) 頁面試試 Get Prime !
+
 ## Pay with Google
 
 提供 Pay with Google 服務，詳細的功能以及使用方式請詳見 [Pay with Google](./Payment_Request/Pay_with_Google) 的頁面  
