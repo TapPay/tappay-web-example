@@ -13,6 +13,24 @@
         TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
     </script>
     <style>
+        #tappay-iframe {
+            font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+            margin: 0;
+            outline: 0;
+            -webkit-appearance: none;
+            tap-highlight-color: rgba(255,255,255,0);
+            line-height: 1.21428571em;
+            padding: .578571em 1em;
+            font-size: 1em;
+            background: #fff;
+            border: 1px solid rgba(34,36,38,.15);
+            color: rgba(0,0,0,.87);
+            border-radius: .28571429rem;
+            box-shadow: 0 0 0 0 transparent inset;
+            -webkit-transition: color .1s ease,border-color .1s ease;
+            transition: color .1s ease,border-color .1s ease;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -21,8 +39,14 @@
         <div class="six wide column">
             <div class="ui segment">
                 <h1 class="ui header">Direct Pay - iframe</h1>
-                <div id="tappay-iframe">
-                </div>
+
+                <form class="ui form">
+                    <div class="field">
+                        <label>信用卡</label>
+                        <div id="tappay-iframe"></div>
+                    </div> 
+                </form>
+                
                 <br>
                 <div class="ui button" id="submit">Get Prime</div>
                 <br>
