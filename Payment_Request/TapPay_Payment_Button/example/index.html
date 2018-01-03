@@ -118,10 +118,10 @@
             ],
             // optional
             options: {
-                requestPayerEmail: true,
-                requestPayerName: true,
-                requestPayerPhone: true,
-                requestShipping: true,
+                requestPayerEmail: false,
+                requestPayerName: false,
+                requestPayerPhone: false,
+                requestShipping: false,
                 shippingType: 'shipping'
             }
         }
@@ -134,25 +134,25 @@
             // defaults to 'TW'
             countryCode: 'TW'
         })
-        // TPDirect.paymentRequestApi.setupPayWithGoogle({
-        //     // defaults to ['CARD', 'TOKENIZED_CARD']
-        //     allowedPaymentMethods: ['CARD', 'TOKENIZED_CARD'],
+        TPDirect.paymentRequestApi.setupPayWithGoogle({
+            // defaults to ['CARD', 'TOKENIZED_CARD']
+            allowedPaymentMethods: ['CARD', 'TOKENIZED_CARD'],
 
-        //     // Indicates whether or not you allow prepaid debit cards as a form of payment.
-        //     // Set to true to allow prepaid debit cards. Otherwise, set to false.
-        //     // defaults to true
-        //     allowPrepaidCards: true,
+            // Indicates whether or not you allow prepaid debit cards as a form of payment.
+            // Set to true to allow prepaid debit cards. Otherwise, set to false.
+            // defaults to true
+            allowPrepaidCards: true,
 
-        //     // defaults to false
-        //     billingAddressRequired: false,
-        //     // defaults to  'MIN'
-        //     billingAddressFormat: 'MIN', // FULL, MIN
+            // defaults to false
+            billingAddressRequired: false,
+            // defaults to  'MIN'
+            billingAddressFormat: 'MIN', // FULL, MIN
 
-        //     // Set the ISO 3166-1 alpha-2 formatted country codes of the countries to which shipping is allowed.
-        //     // If not specified, all countries are allowed.
-        //     // defaults to undefined (allow all shipping address)
-        //     // allowedCountryCodes: ['TW']
-        // })
+            // Set the ISO 3166-1 alpha-2 formatted country codes of the countries to which shipping is allowed.
+            // If not specified, all countries are allowed.
+            // defaults to undefined (allow all shipping address)
+            // allowedCountryCodes: ['TW']
+        })
         TPDirect.paymentRequestApi.setupPaymentRequest(data, function (result) {
             // result.browserSupportPaymentRequest
             // result.canMakePaymentWithActiveCard
@@ -183,7 +183,7 @@
                 -d '{
                     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
                     "prime": "${getPrimeResult.prime}",
-                    "amount": "${getPrimeResult.total_amount}",
+                    "amount": "${parseInt(getPrimeResult.total_amount)}",
                     "merchant_id": "GlobalTesting_CTBC",
                     "details": "Some item",
                     "cardholder": {

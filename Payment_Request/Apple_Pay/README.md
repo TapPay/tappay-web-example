@@ -84,10 +84,10 @@ var data = {
     ],
     // optional
     options: {
-        requestPayerEmail: true,
-        requestPayerName: true,
-        requestPayerPhone: true,
-        requestShipping: true,
+        requestPayerEmail: false,
+        requestPayerName: false,
+        requestPayerPhone: false,
+        requestShipping: false,
         // https://docs.tappaysdk.com/payment-request-api/zh/reference.html#shippingtype
         shippingType: 'shipping'
     }

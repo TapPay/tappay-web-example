@@ -88,10 +88,10 @@ var data = {
     ],
     // optional
     options: {
-        requestPayerEmail: true,
-        requestPayerName: true,
-        requestPayerPhone: true,
-        requestShipping: true,
+        requestPayerEmail: false,
+        requestPayerName: false,
+        requestPayerPhone: false,
+        requestShipping: false,
     }
 }
 ```

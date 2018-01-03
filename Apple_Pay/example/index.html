@@ -4,247 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-
-    <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon-120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-152.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="images/touch-icon-167.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/touch-icon-180.png">
-
+    
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-
     <script src="https://js.tappaysdk.com/tpdirect/v3"></script>
-    <script>
-        TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
-    </script>
 
-    <title>Apple Pay Example</title>
+    <title>Android Pay PaymentRequest Example</title>
+    <style>
+        .ui.meesage {
+            transition: all .5s ease
+        }
+        .apple-pay-button {
+            -webkit-appearance: -apple-pay-button;
+            width: 200px;
+            min-height: 30px;
+            border: 1px solid black;
+            background-image: -webkit-named-image(apple-pay-logo-black);
+            background-size: 100% calc(60% + 2px);
+            background-repeat: no-repeat;
+            background-color: white;
+            background-position: 50% 50%;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px auto;
+            transition: background-color .15s;
+        }
+        .apple-pay-button.buy {
+            /* plain, buy, set-up, donate */
+            -apple-pay-button-type: buy; 
+        }
+        .apple-pay-button.set-up {
+            -apple-pay-button-type: set-up; 
+        }
+    </style>
 </head>
 
 <body>
-    <div class="payment-view">
-        
-        <style>
-            #apple-pay-button {
-                -webkit-appearance: -apple-pay-button;
-                -apple-pay-button-type: buy;
-                display: none;
-                width: 200px;
-                min-height: 30px;
-                border: 1px solid black;
-                background-image: -webkit-named-image(apple-pay-logo-black);
-                background-size: 100% calc(60% + 2px);
-                background-repeat: no-repeat;
-                background-color: white;
-                background-position: 50% 50%;
-                border-radius: 5px;
-                padding: 10px;
-                margin: 5px auto;
-                transition: background-color .15s;
-            }
-        </style>
+    <div class="ui grid centered stackable">
+        <div class="fourteen wide column">
+            <form class="ui form">
 
-        <div class="ui grid centered stackable">
-            <div class="div fourteen wide column">
-                <br>
-                <h2> Buy with Apple&nbsp;Pay </h2>
-                <p>
-                    This is a very simple example site that demonstrates Apple&nbsp;Pay on the web.
-                </p>
-                <p>
-                    Compatible browsers will display an Apple&nbsp;Pay button below.
-                </p>
-                <button id="apple-pay-button"></button>
+                <!-- apple pay -->
+                <div id="apple-pay" class="apple-pay-button" style="display: none;"></div>
+                <!-- payment request -->
+                <button id="pay" type="button" class="ui medium button" style="display: none;">Pay By Prime</button>
+            
+            </form>
+
+            <div class="ui info message support">
+                <div class="ui header">裝置支援：</div>
+                <pre class="content" id="support">檢查中...</pre>
             </div>
-            <div class="fourteen wide column">
-                <pre id="info" class="ui info message" style="overflow-x: auto"></pre>
-                <pre id="curl" class="ui info message" style="overflow-x: auto">
-                </pre>
+            
+            <div class="ui info message hidden result1">
+                <div class="ui header">Get Prime Result</div>
+                <pre class="content" id="result1" style="overflow-x: auto;"></pre>
+            </div>
+            <div class="ui info message hidden curl">
+                <div class="ui header">Use following data to send to server</div>
+                <pre class="content" id="curl" style="overflow-x: auto;"></pre>
             </div>
         </div>
     </div>
 
-    <script>
-
-        // 1. setup
-
-        document.addEventListener('DOMContentLoaded', function () {
-
-            if (TPDirect.applePay.checkAvailability()) {
-                document.getElementById('apple-pay-button').style.display = 'block';
-                document.getElementById('apple-pay-button').addEventListener('click', applePayButtonClicked);
-            }
-
-        });
-
-        function applePayButtonClicked() {
-            const paymentRequest = {
-                countryCode: 'TW',
-                currencyCode: 'TWD',
-                shippingMethods: [{
-                        label: 'Free Shipping',
-                        amount: '0',
-                        identifier: 'free',
-                        detail: 'Delivers in five business days',
-                    },
-                    {
-                        label: 'Express Shipping',
-                        amount: '5',
-                        identifier: 'express',
-                        detail: 'Delivers in two business days',
-                    },
-                ],
-
-                lineItems: [{
-                        label: 'Book',
-                        amount: '1',
-                    },
-                    {
-                        label: 'Pan',
-                        amount: '1',
-                    }
-                ],
-
-                total: {
-                    label: 'TapPay!',
-                    amount: '2',
-                },
-
-                supportedNetworks: ['amex', 'discover', 'masterCard', 'visa'],
-                merchantCapabilities: ['supports3DS'],
-
-                requiredShippingContactFields: ['postalAddress', 'email'],
-                requiredBillingContactFields: ['postalAddress']
-            };
-
-            let totalCost = '2'
-
-            const getPrimeSuccessCallback = function (prime, event, completePayment) {
-                // event 為 ApplePaySession onpaymentauthorized 事件回傳的物件，
-                // 相關文件請查看 https://developer.apple.com/documentation/applepayjs/applepaysession
-                const shippingContact = event.payment.shippingContact
-                const billingContact = event.payment.billingContact
-
-                // 1. 將 prime 回傳給您的伺服器，並呼叫 TapPay 的 pay-by-prime API 來完成付款
-                sendPrime(prime, totalCost, shippingContact, billingContact).then(function (response) {
-                    var resutlStatus = (response.status != 0) ? ApplePaySession.STATUS_FAILURE :
-                        ApplePaySession.STATUS_SUCCESS
-
-                    // 2. 要把 Apple Pay 的 ActionSheet 退回，必須互叫 completePayment
-                    //     如果交易成功必須呼叫 completePayment(ApplePaySession.STATUS_SUCCESS)
-                    //     如果交易成功必須呼叫 completePayment(ApplePaySession.STATUS_FAILURE)
-                    completePayment(resutlStatus)
-                })
-            }
-
-            const getPrimeErrorCallback = function (error) {
-                // error code 請參考文件 https://docs.tappaysdk.com/apple-pay/zh/error.html#error-code
-                $("#info").text('Get prime error \n\n ' + JSON.stringify({
-                    status: error.status,
-                    msg: error.msg
-                }, null, 4))
-            }
-
-            // merchant.tech.cherri.global.test 是 DEMO 頁面專門使用的 merchant id
-            // 如果要在自己頁面上使用 Apple Pay 請參考 Required 去申請 Apple Pay merchant id
-            const session = TPDirect.applePay.buildSession(paymentRequest, "merchant.tech.cherri.global.test",
-                getPrimeSuccessCallback, getPrimeErrorCallback);
-
-            /**
-             * Shipping Method Selection
-             * If the user changes their chosen shipping method we need to recalculate
-             * the total price. We can use the shipping method identifier to determine
-             * which method was selected.
-             */
-            session.onshippingmethodselected = function (event) {
-
-                console.log("===============================")
-                console.log("onshippingmethodselected event");
-                console.log(event);
-                console.log("===============================")
-
-                totalCost = event.shippingMethod.identifier === 'free' ? '2' : '7';
-
-                const total = {
-                    label: 'TapPay!',
-                    amount: totalCost,
-                };
-                const lineItems = [{
-                        label: 'Book',
-                        amount: '1',
-                    },
-                    {
-                        label: 'Pan',
-                        amount: '1',
-                    }
-                ];
-
-                session.completeShippingMethodSelection(ApplePaySession.STATUS_SUCCESS, total, lineItems);
-            };
-
-            // All our handlers are setup - start the Apple Pay payment
-            session.begin();
-        }
-
-        function sendPrime(prime, amount, shippingContact, billingContact) {
-            return new Promise(function (resolve, reject) {
-
-            
-                var data = {
-                    "partner_key": "YOUR_PARTNER_KEY",
-                    "prime": prime,
-                    "amount": amount,
-                    "merchant_id": "YOUR_MERCHANT",
-                    "cardholder": {
-                        "phone_number": '',
-                        "name": billingContact.familyName + billingContact.givenName,
-                        "email": '',
-                        "zip_code": billingContact.postalCode,
-                        "address": billingContact.addressLines.join(' '),
-                        "national_id": "886",
-                    }
-                }
-
-                $("#info").text('Get prime result \n\n ' + JSON.stringify({
-                    prime: prime,
-                    amount: amount,
-                    shippingContact: shippingContact,
-                    billingContact: billingContact
-                }, null, 4))
-
-                var command = `
-                Use following command to send to server \n\n
-                curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
-                -H 'content-type: application/json' \\
-                -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
-                -d '{
-                    "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
-                    "prime": "${prime}",
-                    "amount": "${amount}",
-                    "merchant_id": "GlobalTesting_CTBC",
-                    "details": "Some item",
-                    "cardholder": {
-                        "phone_number": "",
-                        "name": "${billingContact.familyName + billingContact.givenName}",
-                        "email": "",
-                        "zip_code": "${billingContact.postalCode}",
-                        "address": "${billingContact.addressLines.join('\'')}",
-                        "national_id": "A123456789"
-                    }
-                }'`.replace(/                /g, '')
-
-                $("#curl").html(command)
-
-                // Send the data to your server
-
-                resolve({
-                    status: 0
-                })
-
-            });
-        }
-    </script>
+    <script src="./index.js"></script>
 </body>
 
 </html>

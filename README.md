@@ -31,8 +31,8 @@
 
 ## Pay with Google
 
-提供 Pay with Google 服務，詳細的功能以及使用方式請詳見 [Pay with Google](./Payment_Request/Pay_with_Google) 的頁面  
-或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Payment_Request/Pay_with_Google/example/index.html) 頁面試試 Get Prime !
+提供 Pay with Google 服務，詳細的功能以及使用方式請詳見 [Pay with Google](./Pay_with_Google) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Pay_with_Google/example/index.html) 頁面試試 Get Prime !
 
 ## Line Pay
 

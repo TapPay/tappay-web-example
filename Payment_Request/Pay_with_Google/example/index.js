@@ -43,10 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             // optional
             options: {
-                requestPayerEmail: true,
-                requestPayerName: true,
-                requestPayerPhone: true,
-                requestShipping: true,
+                requestPayerEmail: false,
+                requestPayerName: false,
+                requestPayerPhone: false,
+                requestShipping: false,
                 // https://docs.tappaysdk.com/payment-request-api/zh/reference.html#shippingtype
                 shippingType: 'shipping'
             }
@@ -119,15 +119,15 @@ function handlePayByPrime(result, paymentRequest) {
     -d '{
         "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
         "prime": "${result.prime}",
-        "amount": "${result.total_amount}",
+        "amount": "${parseInt(result.total_amount)}",
         "merchant_id": "GlobalTesting_CTBC",
         "details": "Some item",
         "cardholder": {
-            "phone_number": "${result.payer.phone}",
-            "name": "${result.payer.name}",
-            "email": "${result.payer.email}",
+            "phone_number": "0987654321",
+            "name": "王小明",
+            "email": "test@example.com",
             "zip_code": "123",
-            "address": "${result.shippingAddress.addressLine.join('\'')}",
+            "address": "台北市xxx街xx號",
             "national_id": "A123456789"
         }
     }'`.replace(/                /g, '')
