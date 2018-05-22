@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+
+    <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="images/touch-icon-167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/touch-icon-180.png">
+    
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v3"></script>
+
+
+    <title>Samsung Pay Example</title>
+    <style>
+        .ui.meesage {
+            transition: all .5s ease
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ui grid centered stackable">
+        <div class="row"></div>
+        <div class="row"></div>
+        <br>
+        <br>
+        <div class="five wide column">
+            <div id="samsung-pay-button"></div>
+        </div>
+        <div class="fourteen wide column">
+            
+            <div class="ui info message hidden result1">
+                <div class="ui header">Get Prime Result</div>
+                <pre class="content" id="result1" style="overflow-x: auto;"></pre>
+            </div>
+            <div class="ui success message hidden curl">
+                <div class="ui header">Pay Result</div>
+                <pre class="content" id="curl" style="overflow-x: auto;"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
