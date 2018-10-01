@@ -6,7 +6,7 @@
 1. Direct Pay - iframe
 2. Direct Pay - TapPay Fields
 3. Apple Pay
-4. Pay with Google - 僅支援 Android Mobile Web、Chrome M61 版本後以及 Google Play Services version 11.4.x 版本後
+4. Google Pay - 支援 Android Lollipop (5.0) or higher, iPhone & iPad running iOS 7 or higher
 5. Line Pay
 6. Payment Request API
 
