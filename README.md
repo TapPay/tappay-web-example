@@ -29,10 +29,10 @@
 提供 Apple Pay 服務，詳細的功能以及使用方式請詳見 [Apple Pay](./Apple_Pay) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Apple_Pay/example/index.html) 頁面試試 Get Prime !
 
-## Pay with Google
+## Google Pay
 
-提供 Pay with Google 服務，詳細的功能以及使用方式請詳見 [Pay with Google](./Pay_with_Google) 的頁面  
-或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Pay_with_Google/example/index.html) 頁面試試 Get Prime !
+提供 Google Pay 服務，詳細的功能以及使用方式請詳見 [Google Pay](./Google_Pay) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Google_Pay/example/index.html) 頁面試試 Get Prime !
 
 ## Samsung Pay
 

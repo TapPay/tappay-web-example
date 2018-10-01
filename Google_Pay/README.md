@@ -36,9 +36,10 @@
 
 ```javascript
 var googlePaySetting = {
+    
     // Optional in sandbox, Required in production
-
     googleMerchantId: "Come from google portal",
+
     tappayGoogleMerchantId: "Come from tappay portal",
     allowedCardAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
     merchantName: "TapPay Test!",
@@ -111,7 +112,4 @@ TPDirect.googlePay.setupGooglePayButton({
 TPDirect.googlePay.getPrime(function(err, prime){
     // Get the prime, and send it to Server
 })
-
-
-
-
+```
