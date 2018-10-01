@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+
+    <script src="https://pay.google.com/gp/p/js/pay.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v4"></script>
+    <title>Google Pay PaymentRequest Example</title>
+</head>
+
+<body>
+    <div class="ui grid centered stackable">
+        <div class="row"></div>
+        <div class="row"></div>
+        <br>
+        <br>
+        <div id="container"></div>
+        <div class="fourteen wide column">
+            <div class="ui info message hidden result1">
+                <div class="ui header">Get Prime Result</div>
+                <pre class="content" id="result1" style="overflow-x: auto;"></pre>
+            </div>
+            <div class="ui success message hidden curl">
+                <div class="ui header">Pay Result</div>
+                <pre class="content" id="curl" style="overflow-x: auto;"></pre>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var googlePaySetting = {
+                googleMerchantId: "Come from google portal",
+                tappayGoogleMerchantId: "Come from tappay portal",
+                allowedCardAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                merchantName: "TapPay Test!",
+                emailRequired: false, // optional
+                shippingAddressRequired: false, // optional,
+                billingAddressRequired: false, // optional
+                billingAddressFormat: "MIN", // FULL, MIN
+    
+                allowPrepaidCards: false,
+                allowedCountryCodes: ['TW'],
+    
+                phoneNumberRequired: false // optional
+            }
+            TPDirect.googlePay.setupGooglePay(googlePaySetting)
+    
+            var paymentRequest = {
+                allowedNetworks: ["AMEX", "JCB", "MASTERCARD", "VISA"],
+                price: "123", // optional
+                currency: "TWD", // optional
+            }
+            TPDirect.googlePay.setupPaymentRequest(paymentRequest, function (err, result) {
+                if (result.canUseGooglePay) {
+                    TPDirect.googlePay.setupGooglePayButton({
+                        el: "#container",
+                        color: "black",
+                        type: "long",
+                        getPrimeCallback: function(err, prime) {
+                            console.log('Google Pay getPrime result', prime)
+                            handlePayByPrime(prime)
+                        }
+                    })
+                }
+            })
+    
+            function handlePayByPrime(result) {
+                document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
+                document.querySelector('.result1').classList.remove('hidden')
+                document.querySelector('.curl').classList.remove('hidden')
+                
+    
+                var command = `
+                curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+                -H 'content-type: application/json' \\
+                -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
+                -d '{
+                    "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
+                    "prime": "${result}",
+                    "amount": "1",
+                    "merchant_id": "GlobalTesting_CTBC",
+                    "details": "Some item",
+                    "cardholder": {
+                        "phone_number": "0987654321",
+                        "name": "王小明",
+                        "email": "test@example.com",
+                        "zip_code": "123",
+                        "address": "台北市xxx街xx號",
+                        "national_id": "A123456789"
+                    }
+                }'`.replace(/                /g, '')
+    
+                document.querySelector('#curl').innerHTML = command
+            }
+        })
+    </script>
+</body>
+
+</html>
