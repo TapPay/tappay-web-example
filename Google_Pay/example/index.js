@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "address": "台北市xxx街xx號",
                 "national_id": "A123456789"
             }
-        }'`.replace(/                /g, '')
+        }'`.replace(/^        /gm, '')
 
         document.querySelector('#curl').innerHTML = command
 
