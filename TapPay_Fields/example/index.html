@@ -137,7 +137,7 @@
             /* ============================================== */
 
             // cardTypes = ['visa', 'mastercard', ...]
-            let newType = update.cardType === 'unknown' ? '' : update.cardType
+            var newType = update.cardType === 'unknown' ? '' : update.cardType
             $('#cardtype').text(newType)
 
 
@@ -171,7 +171,7 @@
             }
         })
 
-        $('form').on('submit', (event) => {
+        $('form').on('submit', function (event) {
             event.preventDefault()
             
             // fix keyboard issue in iOS device
@@ -187,7 +187,7 @@
             }
 
             // Get prime
-            TPDirect.card.getPrime((result) => {
+            TPDirect.card.getPrime(function (result) {
                 if (result.status !== 0) {
                     alert('get prime error ' + result.msg)
                     return
