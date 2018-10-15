@@ -7,7 +7,7 @@
 2. Direct Pay - TapPay Fields
 3. Apple Pay
 4. Google Pay - 支援 Android Lollipop (5.0) or higher, iPhone & iPad running iOS 7 or higher
-5. Line Pay
+5. LINE Pay
 6. Payment Request API
 
 ## 測試卡號
@@ -39,9 +39,9 @@
 提供 Samsung Pay 服務，詳細的功能以及使用方式請詳見 [Samsung Pay](./Samsung_Pay) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Samsung_Pay/example/index.html) 頁面試試 Get Prime !
 
-## Line Pay
+## LINE Pay
 
-提供 Line Pay 服務，詳細的功能以及使用方式請詳見 [Line Pay](./Line_Pay) 的頁面  
+提供 LINE Pay 服務，詳細的功能以及使用方式請詳見 [LINE Pay](./Line_Pay) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Line_Pay/example/index.html) 頁面試試 Get Prime !
 
 ## Payment Request API

@@ -1,4 +1,4 @@
-# Line Pay with TapPay
+# LINE Pay with TapPay
 
 ## DEMO
 
@@ -6,7 +6,7 @@
 
 ## Required
 
-1. 請搭配 web SDk v2.3.3 使用 Line Pay, 舊版本不支援 Line Pay
+1. 請搭配 web SDk v2.3.3 使用 LINE Pay, 舊版本不支援 LINE Pay
 2. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
 
 ## Overview
@@ -66,7 +66,7 @@ clientip | String | 交易者的 IP 位置
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Line Pay Example</title>
+    <title>LINE Pay Example</title>
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
@@ -82,8 +82,8 @@ clientip | String | 交易者的 IP 位置
         <div class="row"></div>
         <div class="ten wide column ">
             <div class="ui center aligned segment">
-                <h2> Line Pay Test</h2>
-                <button id='sendButton' class="ui button">Pay with Line Pay</button>
+                <h2>LINE Pay Test</h2>
+                <button id='sendButton' class="ui button">Pay with LINE Pay</button>
             </div>
             <div class="ui segment">
                 <pre id="result1" class="ui info message"></pre>
