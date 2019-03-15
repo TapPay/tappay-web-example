@@ -53,7 +53,12 @@ var defaultCardViewStyle = {
     errorColor: 'red',
     placeholderColor: ''
 }
+// 預設不戴第三個參數的話, 是會必須填入 CCV
 TPDirect.card.setup('#cardview-container', defaultCardViewStyle)
+// 帶入第三個參數, config.isUsedCcv 為以下兩種參數代表不同意思
+// false 為 CCV 非必填
+// true 為 CCV 必填
+TPDirect.card.setup('#cardview-container', defaultCardViewStyle, { isUsedCcv: false })
 ```
 
 ### Step 4

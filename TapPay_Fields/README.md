@@ -48,23 +48,41 @@ fields | Object | <table><tr><th>名稱</th><th>類別</th><th>內容</th></tr><
 styles | Object | 支援的 CSS 屬性，請參考 [TapPay Fields Styles](https://docs.tappaysdk.com/reference.html#tappay-fields-styles "TapPay Fields Styles")
 
 ```js
-TPDirect.card.setup({
-    fields: {
-        number: {
-            // css selector
-            element: '#card-number',
-            placeholder: '**** **** **** ****'
-        },
-        expirationDate: {
-            // DOM object
-            element: document.getElementById('card-expiration-date'),
-            placeholder: 'MM / YY'
-        },
-        ccv: {
-            element: '#card-ccv',
-            placeholder: '後三碼'
-        }
+// 如果要設定成 CCV 為選填的話
+// fields 裡面的 ccv 有帶的話就是必填, 不帶的話就是選填
+// 以下提供必填以及選填的 Example
+// 必填 CCV Example
+var fields = {
+    number: {
+        // css selector
+        element: '#card-number',
+        placeholder: '**** **** **** ****'
     },
+    expirationDate: {
+        // DOM object
+        element: document.getElementById('card-expiration-date'),
+        placeholder: 'MM / YY'
+    },
+    ccv: {
+        element: '#card-ccv',
+        placeholder: '後三碼'
+    }
+}
+// 選填 CCV Example
+var fields = {
+    number: {
+        // css selector
+        element: '#card-number',
+        placeholder: '**** **** **** ****'
+    },
+    expirationDate: {
+        // DOM object
+        element: document.getElementById('card-expiration-date'),
+        placeholder: 'MM / YY'
+    }
+}
+TPDirect.card.setup({
+    fields: fields,
     styles: {
         // Style all elements
         'input': {
