@@ -36,11 +36,10 @@
 
 ```javascript
 var googlePaySetting = {
-    
+
     // Optional in sandbox, Required in production
     googleMerchantId: "Come from google portal",
 
-    tappayGoogleMerchantId: "Come from tappay portal",
     allowedCardAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
     merchantName: "TapPay Test!",
     emailRequired: true, // optional

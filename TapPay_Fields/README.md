@@ -44,7 +44,7 @@
 
 名稱 | 類別 | 內容 |
 --- | --- | --- |
-fields | Object | <table><tr><th>名稱</th><th>類別</th><th>內容</th></tr><tr><td>number</td><td>Object</td><td>element: CSS Selector or DOM element<br>placeholder: String</td></tr><tr><td>expirationDate</td><td>Object</td><td>element: CSS Selector or DOM  element<br>placeholder: String</td></tr><tr><td>ccv</td><td>Object</td><td>element: CSS Selector or DOM element<br>placeholder: String</td></tr></table>
+fields | Object | <table><tr><th>名稱</th><th>類別</th><th>內容</th></tr><tr><td>number</td><td>Object</td><td>element: CSS Selector or DOM element<br>placeholder: String</td></tr><tr><td>expirationDate</td><td>Object</td><td>element: CSS Selector or DOM element<br>placeholder: String</td></tr><tr><td>ccv</td><td>Object</td><td>element: CSS Selector or DOM element<br>placeholder: String<br>If there is no input, it will not be verified. In contrast, it will be verified.</td></tr></table>
 styles | Object | 支援的 CSS 屬性，請參考 [TapPay Fields Styles](https://docs.tappaysdk.com/reference.html#tappay-fields-styles "TapPay Fields Styles")
 
 ```js
