@@ -34,7 +34,7 @@
 ## 2. Setup SDK 
 
 ```js
-<script src="https://js.tappaysdk.com/tpdirect/v2_3_3"></script>
+<script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
 <script>
     TPDirect.setupSDK(APP_ID, 'APP_KEY', 'sandbox')
 </script>
