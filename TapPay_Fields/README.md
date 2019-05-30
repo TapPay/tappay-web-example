@@ -34,7 +34,7 @@
 ## 2. Setup SDK 
 
 ```js
-<script src="https://js.tappaysdk.com/tpdirect/v5"></script>
+<script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
 <script>
     TPDirect.setupSDK(APP_ID, 'APP_KEY', 'sandbox')
 </script>
@@ -42,15 +42,10 @@
 
 ## 3. TPDirect.card.setup(config)
 
-名稱 | 類別 | 內容 |
---- | --- | --- |
-fields | Object | <table><tr><th>名稱</th><th>類別</th><th>內容</th></tr><tr><td>number</td><td>Object</td><td>element: CSS Selector or DOM element<br>placeholder: String</td></tr><tr><td>expirationDate</td><td>Object</td><td>element: CSS Selector or DOM element<br>placeholder: String</td></tr><tr><td>ccv</td><td>Object</td><td>element: CSS Selector or DOM element<br>placeholder: String<br>If there is no input, it will not be verified. In contrast, it will be verified.</td></tr></table>
-styles | Object | 支援的 CSS 屬性，請參考 [TapPay Fields Styles](https://docs.tappaysdk.com/reference.html#tappay-fields-styles "TapPay Fields Styles")
+詳細的 config 設定內容可以參考(TapPay Docs - TapPay Field Config)[https://docs.tappaysdk.com/tutorial/zh/web/front.html#tpdirect-card-setup12]
 
 ```js
-// 如果要設定成 CCV 為選填的話
-// fields 裡面的 ccv 有帶的話就是必填, 不帶的話就是選填
-// 以下提供必填以及選填的 Example
+// 以下提供必填 CCV 以及選填 CCV 的 Example
 // 必填 CCV Example
 var fields = {
     number: {
@@ -126,16 +121,7 @@ TPDirect.card.setup({
 ## 3. onUpdate
 
 實作 TPDirect.card.onUpdate，得知目前卡片資訊的輸入狀態<br>
-Callback 函數回傳的物件內將會有以下幾個屬性
-
-名稱 | 內容
---- | ---
-cardType (String) | mastercard, visa, jcb, amex, unknown
-canGetPrime (boolean) | true = 全部欄位皆為正確，可以呼叫 getPrime
-hasError (boolean) | true = 任何欄位有錯誤
-status.number (int) | 回傳的 status code 請參考 [reference](https://docs.tappaysdk.com/reference.html#status-code "status code")
-status.expiry (int) | 回傳的 status code 請參考 [reference](https://docs.tappaysdk.com/reference.html#status-code "status code")
-status.cvc (int) | 回傳的 status code 請參考 [reference](https://docs.tappaysdk.com/reference.html#status-code "status code")
+Callback 函數回傳的物件內可以參考此文件(TapPay Docs - onUpdate)[https://docs.tappaysdk.com/tutorial/zh/web/front.html#onupdate13]
 
 ```javascript
 TPDirect.card.onUpdate(function (update) {
@@ -193,12 +179,7 @@ TPDirect.card.onUpdate(function (update) {
 
 
 使用 TPDirect.card.getPrime 取得 Prime
-
-名稱 | 內容
---- | ---
-status | 錯誤代碼，0 為成功
-card | 卡片資訊，將會回傳以下幾個值：<br><table><tr><th>名稱</th><th>類別(長度)</th><th>內容</th></tr><tr><td>prime</td><td>String(64)</td><td>prime 字串，於 <a href="https://docs.tappaysdk.com/tutorial/ch/back.html#pay-by-prime-api">Pay by Prime</a> 交易時使用</td></tr><tr><td>bincode</td><td>String(6)</td><td>卡片前六碼</td></tr><tr><td>lastfour</td><td>String(4)</td><td>卡片後四碼</td></tr><tr><td>issuer</td><td>String</h><td>發卡銀行</td></tr><tr><td>funding</td><td>int</td><td>卡片類別<br>0 = 信用卡 (Credit Card)<br>1 = 簽帳卡 (Debit Card)<br>2 = 預付卡 (Prepaid Card)</td></tr><tr><td>type</td><td>int</td><td>卡片種類<br>1 = VISA<br>2 = MasterCard<br>3 = JCB<br>4 = Union Pay<br>5 = AMEX</td></tr><tr><td>level</td><td>String</td><td>卡片等級</td></tr><tr><td>country</td><td>String</td><td>發卡行國家</td></tr><tr><td>countrycode</td><td>String</td><td>發卡行國家碼</td></tr></table>
-clientip | 交易者的 IP 位置
+回傳格式可以參考 [TapPay Docs - Get Prime Result](https://docs.tappaysdk.com/tutorial/zh/web/front.html#get-prime15)
 
 ```js
 // call TPDirect.card.getPrime when user submit form to get tappay prime
