@@ -70,11 +70,7 @@ clientip | String | 交易者的 IP 位置
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-<<<<<<< HEAD
-    <script src="https://js.tappaysdk.com/tpdirect/v5"></script>
-=======
     <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
->>>>>>> feature/add_card_identifier
     <script>
         TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
     </script>
