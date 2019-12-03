@@ -74,6 +74,9 @@
             errorColor: 'red',
             placeholderColor: ''
         }
+        var config = { 
+            isUsedCcv: false 
+        }
         TPDirect.card.setup('#tappay-iframe', defaultCardViewStyle, config)
         TPDirect.card.onUpdate(function (update) {
 
