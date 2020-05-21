@@ -6,9 +6,10 @@
 1. Direct Pay - iframe
 2. Direct Pay - TapPay Fields
 3. Apple Pay
-4. Google Pay - 支援 Android Lollipop (5.0) or higher, iPhone & iPad running iOS 7 or higher
+4. Google Pay - 支援 Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Opera, and UCWeb UC Browser.
 5. LINE Pay
-6. Payment Request API
+6. Payment Request API - 支援 Apple Pay、Direct Pay  
+7. JKO Pay
 
 ## 測試卡號
 4242 4242 4242 4242
@@ -43,6 +44,11 @@
 
 提供 LINE Pay 服務，詳細的功能以及使用方式請詳見 [LINE Pay](./Line_Pay) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Line_Pay/example/index.html) 頁面試試 Get Prime !
+
+## JKO Pay
+
+提供 JKO Pay 服務，詳細的功能以及使用方式請詳見 [JKO Pay](./JKO_Pay) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/JKO_Pay/example/index.html) 頁面試試 Get Prime !
 
 ## Payment Request API
 
