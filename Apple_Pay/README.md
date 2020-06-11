@@ -43,6 +43,9 @@
 可以讓 Payment Request API 支援 Apple Pay 方法  
 詳細參數設定請參考[文件](https://docs.tappaysdk.com/payment-request-api/zh/front.html#paymentrequest)
 
+如果要使用 Apple Pay 延後授權功能, 請參考[文件](https://docs.tappaysdk.com/apple-pay/zh/front.html#paymentrequest)上面  
+在 displayItems 或 total 這兩個 object 之中帶入 isAmountPending 即可使用, 詳細帶入規則也請參考[文件](https://docs.tappaysdk.com/apple-pay/zh/front.html#paymentrequest)  
+
 ```javascript
 var data = {
     supportedNetworks: ['MASTERCARD', 'VISA', 'AMEX'],
