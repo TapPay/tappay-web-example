@@ -10,6 +10,7 @@
 5. LINE Pay
 6. Payment Request API - 支援 Apple Pay、Direct Pay  
 7. JKO Pay
+8. Easy Wallet
 
 ## 測試卡號
 4242 4242 4242 4242
@@ -49,6 +50,11 @@
 
 提供 JKO Pay 服務，詳細的功能以及使用方式請詳見 [JKO Pay](./JKO_Pay) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/JKO_Pay/example/index.html) 頁面試試 Get Prime !
+
+## Easy Wallet
+
+提供 Easy Wallet 服務，詳細的功能以及使用方式請詳見 [Easy Wallet](./Easy_Wallet) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Easy_Wallet/example/index.html) 頁面試試 Get Prime !
 
 ## Payment Request API
 
