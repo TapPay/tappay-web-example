@@ -99,7 +99,7 @@ clientip | String | 交易者的 IP 位置
             // result 就是 get prime 拿到的結果
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送
-            // 然後再用 TapPay.redirect(payment_url) 到 JKO Pay 付款頁面
+            // 然後再用 TPDirect.redirect(payment_url) 到 JKO Pay 付款頁面
 var command = `Use following command to send to server \n\n
 curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
 -H 'content-type: application/json' \\
