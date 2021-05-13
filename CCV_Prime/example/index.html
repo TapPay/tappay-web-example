@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <title>CCV Get Prime</title>
+    <script src="https://js.tappaysdk.com/tpdirect/v5.7.0"></script>
+</head>
+
+<body>
+    <div class="ui grid centered doubling stackable">
+        <div class="six wide column">
+            <div class="ui segment">
+                <h1 class="ui header">Direct Pay - Get CCV Prime</h1>
+                <form class="ui form">
+                    <div class="field">
+                        <button class="ui button" type="button" onclick="TPDirect.ccv.setupCardType(TPDirect.CardType.VISA)">VISA</button>
+                        <button class="ui button" type="button" onclick="TPDirect.ccv.setupCardType(TPDirect.CardType.JCB)">JCB</button>
+                        <button class="ui button" type="button" onclick="TPDirect.ccv.setupCardType(TPDirect.CardType.MASTERCARD)">MASTERCARD</button>
+                        <button class="ui button" type="button" onclick="TPDirect.ccv.setupCardType(TPDirect.CardType.AMEX)">AMEX</button>
+                        <button class="ui button" type="button" onclick="TPDirect.ccv.setupCardType(TPDirect.CardType.UNKNOWN)">UNKNOWN</button>
+                    </div>
+                    <div class="field">
+                        <label>CCV</label>
+                        <div id="ccv-field" style="height: 35px;"></div>
+                    </div> 
+                </form>
+                <div class="ui button" id="get-ccv-prime">Get Prime</div>
+                <pre id="log-zone"></pre>
+            </div>
+        </div>
+    </div>
+    <script>
+        function appendMessager(message) {
+            document.getElementById("log-zone").innerText = message + document.getElementById("log-zone").innerText
+        }
+        TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
+        TPDirect.ccv.setup({
+            fields: {
+                ccv: {
+                    element: "#ccv-field",
+                    placeholder: '後三碼'
+                }
+            },
+            styles: {
+                'input': {
+                    'color': '#808080'
+                },
+                'input.ccv': {
+                    'font-size': '16px'
+                },
+                ':focus': {
+                    'color': 'black'
+                },
+                '.valid': {
+                    'color': 'green'
+                },
+                '.invalid': {
+                    'color': 'red'
+                }
+            }
+        })
+        TPDirect.ccv.onUpdate((data) => {
+            appendMessager("Ccv onupdate data: " + JSON.stringify(data, null, 4) + "\n")
+        })
+
+        document.getElementById("get-ccv-prime").addEventListener('click', function() {
+            TPDirect.ccv.getPrime().then(function (response) {
+                appendMessager("Response: " + JSON.stringify(response, null, 4) + "\n")
+            }).catch(function(error) {
+                appendMessager("error happen: " + error.message + "\n")
+            })
+        })
+    </script>
+</body>
+
+</html>

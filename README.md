@@ -5,12 +5,13 @@
 
 1. Direct Pay - iframe
 2. Direct Pay - TapPay Fields
-3. Apple Pay
-4. Google Pay - 支援 Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Opera, and UCWeb UC Browser.
-5. LINE Pay
-6. Payment Request API - 支援 Apple Pay、Direct Pay  
-7. JKO Pay
-8. Easy Wallet
+3. Direct Pay - Get CCV Prime
+4. Apple Pay
+5. Google Pay - 支援 Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Opera, and UCWeb UC Browser.
+6. LINE Pay
+7. Payment Request API - 支援 Apple Pay、Direct Pay  
+8. JKO Pay
+9. Easy Wallet
 
 ## 測試卡號
 4242 4242 4242 4242
@@ -26,6 +27,11 @@
 提供讓您客製化表單的功能，詳細的功能以及使用方式請詳見 [Direct Pay - TapPay Fields](./TapPay_Fields) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/TapPay_Fields/example/index.html) 頁面試試 Get Prime !
 
+## Direct Pay - CCV Prime
+
+提供讓您在此情境『當使用 Pay by Card Token API 時，希望帶入 CCV 進行交易，但卻不想經手明碼 CCV』下進行交易  
+詳細的功能以及使用方式請詳見 [Direct Pay - CCV Prime](./CCV_Prime) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/CCV_Prime/example/index.html) 頁面試試 Get CCV Prime !
 ## Apple Pay
 
 提供 Apple Pay 服務，詳細的功能以及使用方式請詳見 [Apple Pay](./Apple_Pay) 的頁面  
