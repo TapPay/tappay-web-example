@@ -84,7 +84,7 @@ TPDirect.card.setup({
             'color': 'gray'
         },
         // Styling ccv field
-        'input.cvc': {
+        'input.ccv': {
             // 'font-size': '16px'
         },
         // Styling expiration-date field
@@ -157,9 +157,9 @@ TPDirect.card.onUpdate(function (update) {
         // setNumberFormGroupToNormal()
     }
     
-    if (update.status.cvc === 2) {
+    if (update.status.ccv === 2) {
         // setNumberFormGroupToError()
-    } else if (update.status.cvc === 0) {
+    } else if (update.status.ccv === 0) {
         // setNumberFormGroupToSuccess()
     } else {
         // setNumberFormGroupToNormal()
