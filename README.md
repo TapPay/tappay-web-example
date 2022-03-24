@@ -12,6 +12,7 @@
 7. Payment Request API - 支援 Apple Pay、Direct Pay  
 8. JKO Pay
 9. Easy Wallet
+10. Atome
 
 ## 測試卡號
 4242 4242 4242 4242
@@ -61,6 +62,12 @@
 
 提供 Easy Wallet 服務，詳細的功能以及使用方式請詳見 [Easy Wallet](./Easy_Wallet) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Easy_Wallet/example/index.html) 頁面試試 Get Prime !
+
+## Atome
+
+提供 Atome 服務，詳細的功能以及使用方式請詳見 [Atome](./Atome) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Atome/example/index.html) 頁面試試 Get Prime !
+
 
 ## Payment Request API
 
