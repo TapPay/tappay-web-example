@@ -73,6 +73,11 @@
 提供 Pi Wallet 服務，詳細的功能以及使用方式請詳見 [Pi Wallet](./Pi_Wallet) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Pi_Wallet/example/index.html) 頁面試試 Get Prime !
 
+## Plus Pay
+
+提供 Plus Pay 服務，詳細的功能以及使用方式請詳見 [Plus Pay](./Plus_Pay) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Plus_Pay/example/index.html) 頁面試試 Get Prime !
+
 
 ## Payment Request API
 

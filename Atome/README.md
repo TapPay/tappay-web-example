@@ -46,7 +46,7 @@ result 的資料格式為
 --- | --- | ---
 status | Int | 錯誤代碼，0 為成功
 msg | String | 錯誤訊息
-prime | String | prime 字串 `ew_` 開頭，於 <a href="https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api">Pay by Prime</a> 交易時使用
+prime | String | prime 字串 `at_` 開頭，於 <a href="https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api">Pay by Prime</a> 交易時使用
 clientip | String | 交易者的 IP 位置
 
 ### Step 4
