@@ -9,10 +9,9 @@
 4. Apple Pay
 5. Google Pay - 支援 Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Opera, and UCWeb UC Browser.
 6. LINE Pay
-7. Payment Request API - 支援 Apple Pay、Direct Pay  
-8. JKO Pay
-9. Easy Wallet
-10. Atome
+7. JKO Pay
+8. Easy Wallet
+9. Atome
 
 ## 測試卡號
 4242 4242 4242 4242
@@ -77,8 +76,3 @@
 
 提供 Plus Pay 服務，詳細的功能以及使用方式請詳見 [Plus Pay](./Plus_Pay) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Plus_Pay/example/index.html) 頁面試試 Get Prime !
-
-
-## Payment Request API
-
-提供 Payment Request API 服務，詳細的功能、使用方式以及 DEMO 頁面請詳見 [Payment Request API](./Payment_Request) 的頁面
