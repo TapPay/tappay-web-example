@@ -23,7 +23,7 @@
 引入 SKD 並且進行初始化
 
 ```javascript
-<script src="https://js.tappaysdk.com/tpdirect/v5.12.1"></script>
+<script src="https://js.tappaysdk.com/tpdirect/v5.12.3"></script>
 <script>
     TPDirect.setupSDK(APP_ID, 'APP_KEY', 'sandbox')
 </script>
