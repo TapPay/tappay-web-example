@@ -23,7 +23,7 @@
 引入 SKD 並且進行初始化
 
 ```javascript
-<script src="https://js.tappaysdk.com/tpdirect/v5.12.3"></script>
+<script src="https://js.tappaysdk.com/tpdirect/v5.13.0"></script>
 <script>
     TPDirect.setupSDK(APP_ID, 'APP_KEY', 'sandbox')
 </script>
@@ -58,7 +58,26 @@ TPDirect.card.setup('#cardview-container', defaultCardViewStyle)
 // 帶入第三個參數, config.isUsedCcv 為以下兩種參數代表不同意思
 // false 為 CCV 非必填
 // true 為 CCV 必填
-TPDirect.card.setup('#cardview-container', defaultCardViewStyle, { isUsedCcv: false })
+
+// 卡號輸入完畢，驗證成功後會將設定的起始位元至結束位元以 * 做遮蔽
+// 若遮蔽後，點擊到信用卡欄位做變更(輸入或刪除卡號)，會將遮蔽卡號 * 清除
+// 若結束位元超過信用卡卡號長度，會以信用卡卡號長度上限做遮蔽
+
+// isMaskCreditCardNumber: boolean
+// 設定是否要啟用遮蔽卡號功能
+// beginIndex: Int
+// 起始遮蔽卡號位元
+// endIndex: Int
+// 結束遮蔽卡號位元
+TPDirect.card.setup('#cardview-container', defaultCardViewStyle, { 
+    isUsedCcv: false,
+    // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+    isMaskCreditCardNumber: true,
+    maskCreditCardNumberRange: {
+        beginIndex: 6, 
+        endIndex: 11
+    }
+})
 ```
 
 ### Step 4
@@ -72,7 +91,7 @@ TPDirect.card.setup('#cardview-container', defaultCardViewStyle, { isUsedCcv: fa
 | update.hasError     | true = 任何欄位有錯誤     |
 | update.status.number| <table><thead><tr><td>Code</td><td>內容</td></tr></thead><tbody><tr><td>0</td><td>欄位已填好，並且沒有問題</td></tr><tr><td>1</td><td>欄位還沒有填寫</td></tr><tr><td>2</td><td>欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor </td></tr><tr><td>3</td><td>使用者正在輸入中</td></tr></tbody></table> |
 | update.status.expiry| <table><thead><tr><td>Code</td><td>內容</td></tr></thead><tbody><tr><td>0</td><td>欄位已填好，並且沒有問題</td></tr><tr><td>1</td><td>欄位還沒有填寫</td></tr><tr><td>2</td><td>欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor </td></tr><tr><td>3</td><td>使用者正在輸入中</td></tr></tbody></table>     |
-| update.status.cvc   | <table><thead><tr><td>Code</td><td>內容</td></tr></thead><tbody><tr><td>0</td><td>欄位已填好，並且沒有問題</td></tr><tr><td>1</td><td>欄位還沒有填寫</td></tr><tr><td>2</td><td>欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor </td></tr><tr><td>3</td><td>使用者正在輸入中</td></tr></tbody></table>     |
+| update.status.ccv   | <table><thead><tr><td>Code</td><td>內容</td></tr></thead><tbody><tr><td>0</td><td>欄位已填好，並且沒有問題</td></tr><tr><td>1</td><td>欄位還沒有填寫</td></tr><tr><td>2</td><td>欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor </td></tr><tr><td>3</td><td>使用者正在輸入中</td></tr></tbody></table>     |
 
 
 ### Step 5

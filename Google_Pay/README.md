@@ -23,7 +23,7 @@
 
 ```html
 <script src="https://pay.google.com/gp/p/js/pay.js"></script>
-<script src="https://js.tappaysdk.com/tpdirect/v5.12.3"></script>
+<script src="https://js.tappaysdk.com/tpdirect/v5.13.0"></script>
 <script>
     TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
 </script>

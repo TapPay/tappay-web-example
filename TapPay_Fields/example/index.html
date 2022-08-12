@@ -62,9 +62,9 @@
                 <label for="expiration-date" class="control-label">卡片到期日</label>
                 <div class="form-control expiration-date" id="tappay-expiration-date"></div>
             </div>
-            <div class="form-group cvc-group">
-                <label for="cvc" class="control-label">卡片後三碼</label>
-                <div class="form-control cvc"></div>
+            <div class="form-group ccv-group">
+                <label for="ccv" class="control-label">卡片後三碼</label>
+                <div class="form-control ccv"></div>
             </div>
 
             <button type="submit" class="btn btn-default">Pay</button>
@@ -75,7 +75,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://js.tappaysdk.com/tpdirect/v5.12.3"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v5.13.0"></script>
     <script>
         TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
         TPDirect.card.setup({
@@ -89,7 +89,7 @@
                     placeholder: 'MM / YY'
                 },
                 ccv: {
-                    element: $('.form-control.cvc')[0],
+                    element: $('.form-control.ccv')[0],
                     placeholder: '後三碼'
                 }
             },
@@ -114,6 +114,12 @@
                         'color': 'orange'
                     }
                 }
+            },
+            // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+            isMaskCreditCardNumber: true,
+            maskCreditCardNumberRange: {
+                beginIndex: 6, 
+                endIndex: 11
             }
         })
         // listen for TapPay Field
@@ -162,12 +168,12 @@
                 setNumberFormGroupToNormal('.expiration-date-group')
             }
 
-            if (update.status.cvc === 2) {
-                setNumberFormGroupToError('.cvc-group')
-            } else if (update.status.cvc === 0) {
-                setNumberFormGroupToSuccess('.cvc-group')
+            if (update.status.ccv === 2) {
+                setNumberFormGroupToError('.ccv-group')
+            } else if (update.status.ccv === 0) {
+                setNumberFormGroupToSuccess('.ccv-group')
             } else {
-                setNumberFormGroupToNormal('.cvc-group')
+                setNumberFormGroupToNormal('.ccv-group')
             }
         })
 

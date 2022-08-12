@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://js.tappaysdk.com/tpdirect/v5.12.3"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v5.13.0"></script>
     <title>Direct Pay - iframe</title>
     <script>
         TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
@@ -75,7 +75,13 @@
             placeholderColor: ''
         }
         var config = { 
-            isUsedCcv: false 
+            isUsedCcv: false,
+            // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+            isMaskCreditCardNumber: true,
+            maskCreditCardNumberRange: {
+                beginIndex: 6, 
+                endIndex: 11
+            }
         }
         TPDirect.card.setup('#tappay-iframe', defaultCardViewStyle, config)
         TPDirect.card.onUpdate(function (update) {
@@ -95,7 +101,7 @@
                 canGetPrime: ${update.canGetPrime} \n
                 cardNumberStatus: ${statusTable[update.status.number]} \n
                 cardExpiryStatus: ${statusTable[update.status.expiry]} \n
-                cvcStatus: ${statusTable[update.status.cvc]}
+                ccvStatus: ${statusTable[update.status.ccv]}
             `.replace(/    /g, '')
 
             if (update.hasError) {

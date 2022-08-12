@@ -38,7 +38,7 @@ Android Phone 打開後
 首先我們要建立出付款頁面 `index.html` 並且在 `<head></head>` 中引入 SDK
 
 ```html
-<script src="https://js.tappaysdk.com/tpdirect/v5.12.3"></script>
+<script src="https://js.tappaysdk.com/tpdirect/v5.13.0"></script>
 <script>
     TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
 </script>

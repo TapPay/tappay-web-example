@@ -34,7 +34,7 @@
 ## 2. Setup SDK 
 
 ```js
-<script src="https://js.tappaysdk.com/tpdirect/v5.12.3"></script>
+<script src="https://js.tappaysdk.com/tpdirect/v5.13.0"></script>
 <script>
     TPDirect.setupSDK(APP_ID, 'APP_KEY', 'sandbox')
 </script>
@@ -114,6 +114,12 @@ TPDirect.card.setup({
                 'color': 'orange'
             }
         }
+    },
+    // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+    isMaskCreditCardNumber: true,
+    maskCreditCardNumberRange: {
+        beginIndex: 6, 
+        endIndex: 11
     }
 })
 ```
