@@ -29,7 +29,7 @@
 首先我們要建立出付款頁面 `index.html` 並且在 `<head></head>` 中引入 SDK
 
 ```html
-<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.15.0"></script>
 <script>
     TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
 </script>
