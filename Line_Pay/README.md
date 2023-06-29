@@ -23,7 +23,7 @@
 首先我們要建立出付款頁面 `index.html` 並且在 `<head></head>` 中引入 SDK
 
 ```html
-<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.15.0"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.15.1"></script>
 ```
 
 ### Step 2
@@ -70,7 +70,7 @@ clientip | String | 交易者的 IP 位置
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.15.0"></script>
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.15.1"></script>
     <script>
         TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
     </script>
