@@ -1,10 +1,68 @@
+# Pay Later with TapPay
+
+## Required
+
+1. 請搭配 Web SDk v5.17.0 使用 Pay Later, 舊版本不支援 Pay Later
+2. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
+
+## Overview
+
+1. 前端用 `TPDirect.payLater.getPrime()` 拿到 Pay Later 專屬的 `prime`
+2. 前端把 `prime` 送到後端伺服器
+3. 前端等待後端伺服器回傳 `payment_url` 並使用 `TPDirect.redirect(payment_url)` 的方式讓使用者進行 Pay Later 付款
+
+
+## 教學
+
+### Step 1
+
+首先我們要建立出付款頁面 `index.html` 並且在 `<head></head>` 中引入 SDK
+
+```html
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.0"></script>
+```
+
+### Step 2
+
+初始化 TapPay SDK
+
+```js
+TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
+```
+
+### Step 3
+
+使用 `TPDirect.payLater.getPrime(callback)` 去拿 `prime`
+
+```js
+TPDirect.payLater.getPrime(function(result) {
+    // code
+})
+```
+
+result 的資料格式為
+
+名稱 | 型別 | 內容
+--- | --- | ---
+status | Int | 錯誤代碼，0 為成功
+msg | String | 錯誤訊息
+prime | String | prime 字串 `pl_` 開頭，於 <a href="https://docs.tappaysdk.com/pay-later/zh/advanced.html#bind-card-api">Bind Card</a> 交易時使用
+clientip | String | 交易者的 IP 位置
+
+### Step 4
+
+等待後端伺服器回傳 `payment_url`，然後請使用 `TapPay.redirect(payment_url)` 跳轉
+
+### 完整 index.html 頁面
+
+```html
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pi Wallet Example</title>
+    <title>Pay Later Example</title>
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
@@ -20,8 +78,8 @@
         <div class="row"></div>
         <div class="ten wide column ">
             <div class="ui center aligned segment">
-                <h2>Pi Wallet Test</h2>
-                <button id='sendButton' class="ui button">Pay with Pi Wallet</button>
+                <h2>Pay Later Test</h2>
+                <button id='sendButton' class="ui button">Pay with Pay Later</button>
             </div>
             <div class="ui segment">
                 <pre id="result1" class="ui info message" style="overflow-x: auto"></pre>
@@ -38,20 +96,20 @@
     var sendButton = document.getElementById("sendButton")
     $('button#sendButton').click(function() {
         // callback style
-        TPDirect.piWallet.getPrime(function (error, result) {
+        TPDirect.payLater.getPrime(function (error, result) {
             // result 就是 get prime 拿到的結果
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送
-            // 然後再用 TPDirect.piWallet.pay(payment_url) 到 Pi Wallet 付款頁面
+            // 然後再用 TPDirect.payLater.pay(payment_url) 到 Pay Later 付款頁面
 var command = `Use following command to send to server \n\n
-curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+curl -X POST https://sandbox.tappaysdk.com/tpc/card/bind \\
 -H 'content-type: application/json' \\
 -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
 -d '{
     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
     "prime": "${result.prime}",
     "amount": "1",
-    "merchant_id": "GlobalTesting_PI_WALLET_Manual_CAP",
+    "merchant_id": "pay.later.test",
     "details": "Some item",
     "cardholder": {
         "phone_number": "+886923456789",
@@ -59,10 +117,11 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
         "email": "LittleMing@Wang.com",
         "zip_code": "100",
         "address": "台北市天龍區芝麻街1號1樓",
-        "national_id": "A123456789"
+        "national_id": "A190902632",
+        "member_id": "0123498765"
     },
     "result_url": {
-        "frontend_redirect_url": "https://tappay.github.io/tappay-web-example/Pi_Wallet/example/index.html",
+        "frontend_redirect_url": "https://tappay.github.io/tappay-web-example/Pay_Later/example/index.html",
         "backend_notify_url": "https://your.server.com/notify"
     }
 }'`
@@ -70,20 +129,20 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
         })
 
         // promise style
-//         TPDirect.piWallet.getPrime().then(function (result) {
+//         TPDirect.payLater.getPrime().then(function (result) {
 //             // result 就是 get prime 拿到的結果
 //             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
 //             // 拿到 get prime 結果後就需要往後端伺服器送
-//             // 然後再用 TPDirect.piWallet.pay(payment_url) 到 Pi Wallet 付款頁面
+//             // 然後再用 TPDirect.payLater.pay(payment_url) 到 Pay Later 付款頁面
 // var command = `Use following command to send to server \n\n
-// curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+// curl -X POST https://sandbox.tappaysdk.com/tpc/card/bind \\
 // -H 'content-type: application/json' \\
 // -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
 // -d '{
 //     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
 //     "prime": "${result.prime}",
 //     "amount": "1",
-//     "merchant_id": "GlobalTesting_PI_WALLET_Manual_CAP",
+//     "merchant_id": "pay.later.test",
 //     "details": "Some item",
 //     "cardholder": {
 //         "phone_number": "+886923456789",
@@ -91,10 +150,11 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
 //         "email": "LittleMing@Wang.com",
 //         "zip_code": "100",
 //         "address": "台北市天龍區芝麻街1號1樓",
-//         "national_id": "A123456789"
+//         "national_id": "A190902632",
+//         "member_id": "0123498765"
 //     },
 //     "result_url": {
-//         "frontend_redirect_url": "https://tappay.github.io/tappay-web-example/Pi_Wallet/example/index.html",
+//         "frontend_redirect_url": "https://tappay.github.io/tappay-web-example/Pay_Later/example/index.html",
 //         "backend_notify_url": "https://your.server.com/notify"
 //     }
 // }'`
@@ -103,3 +163,4 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
     })
 </script>
 </html>
+```
