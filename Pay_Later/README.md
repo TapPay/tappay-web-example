@@ -2,7 +2,7 @@
 
 ## Required
 
-1. 請搭配 Web SDk v5.17.0 使用 Pay Later, 舊版本不支援 Pay Later
+1. 請使用 Web SDk v5.17.0 以上版本使用 Pay Later, 舊版本不支援 Pay Later
 2. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
 
 ## Overview
@@ -19,7 +19,7 @@
 首先我們要建立出付款頁面 `index.html` 並且在 `<head></head>` 中引入 SDK
 
 ```html
-<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.0"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.1"></script>
 ```
 
 ### Step 2
@@ -66,7 +66,7 @@ clientip | String | 交易者的 IP 位置
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.0"></script>
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.1"></script>
     <script>
         TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
     </script>
