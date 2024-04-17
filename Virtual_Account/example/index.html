@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LINE Pay Example</title>
+    <title>Virtual Account Example</title>
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
@@ -20,14 +20,14 @@
         <div class="row"></div>
         <div class="ten wide column ">
             <div class="ui center aligned segment">
-                <h2>LINE Pay Test</h2>
-                <button id='sendButton' class="ui button">Pay with LINE Pay</button>
+                <h2>Virtual Account Test</h2>
+                <button id='sendButton' class="ui button">Pay with Virtual Account</button>
             </div>
             <div class="ui segment">
                 <pre id="result1" class="ui info message" style="overflow-x: auto"></pre>
             </div>
             <div class="ui segment">
-                <pre id="curl" class="ui info message" style="overflow-x: auto">
+                    <pre id="curl" class="ui info message" style="overflow-x: auto">
             </div>
         </div>
     </div>
@@ -37,20 +37,20 @@
     // 需要把 prime 送到伺服器
     var sendButton = document.getElementById("sendButton")
     $('button#sendButton').click(function() {
-        TPDirect.linePay.getPrime(function (result) {
+        // callback style
+        TPDirect.virtualAccount.getPrime(function (error, result) {
             // result 就是 get prime 拿到的結果
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送
-            // 然後再用 TPDirect.redirect(payment_url) 到 Line Pay 付款頁面
-var command = `Use following command to send to server \n\n
+            var command = `Use following command to send to server \n\n
 curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
 -H 'content-type: application/json' \\
 -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
 -d '{
     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
     "prime": "${result.prime}",
-    "amount": "1",
-    "merchant_id": "GlobalTesting_LINEPAY",
+    "amount": "16",
+    "merchant_id": "GlobalTesting_VIRTUAL_ACCOUNT",
     "details": "Some item",
     "cardholder": {
         "phone_number": "+886923456789",
@@ -61,13 +61,13 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
         "national_id": "A123456789"
     },
     "result_url": {
-        "frontend_redirect_url": "https://tappay.github.io/tappay-web-example/Line_Pay/example/index.html",
+        "frontend_redirect_url": "https://tappay.github.io/tappay-web-example/Virtual_Account/example/index.html",
         "backend_notify_url": "https://your.server.com/notify"
     }
 }'`
             $("#curl").html(command)
-
         })
     })
 </script>
+
 </html>
