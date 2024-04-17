@@ -91,7 +91,7 @@ clientip | String | 交易者的 IP 位置
     var sendButton = document.getElementById("sendButton")
     $('button#sendButton').click(function() {
         // callback style
-        TPDirect.payLater.getPrime(function (error, result) {
+        TPDirect.virtualAccount.getPrime(function (error, result) {
             // result 就是 get prime 拿到的結果
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送
@@ -124,7 +124,7 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
         })
 
         // promise style
-//         TPDirect.payLater.getPrime().then(function (result) {
+//         TPDirect.virtualAccount.getPrime().then(function (result) {
 //             // result 就是 get prime 拿到的結果
 //             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
 //             // 拿到 get prime 結果後就需要往後端伺服器送
