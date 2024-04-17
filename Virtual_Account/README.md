@@ -1,13 +1,13 @@
-# Virtual Account with TapPay
+# Virtual Account(ATM) with TapPay
 
 ## Required
 
-1. 請使用 Web SDk v5.18.0 以上版本使用 Virtual Account, 舊版本不支援 Virtual Account
+1. 請使用 Web SDk v5.18.0 以上版本使用 Virtual Account(ATM), 舊版本不支援 Virtual Account(ATM)
 2. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
 
 ## Overview
 
-1. 前端用 `TPDirect.virtualAccount.getPrime()` 拿到 Virtual Account 專屬的 `prime`
+1. 前端用 `TPDirect.virtualAccount.getPrime()` 拿到 Virtual Account(ATM) 專屬的 `prime`
 2. 前端把 `prime` 送到後端伺服器, 伺服器會回覆虛擬繳費帳號相關資訊
 
 ## 教學
@@ -57,7 +57,7 @@ clientip | String | 交易者的 IP 位置
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Virtual Account Example</title>
+    <title>Virtual Account(ATM) Example</title>
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
@@ -73,8 +73,8 @@ clientip | String | 交易者的 IP 位置
     <div class="row"></div>
     <div class="ten wide column ">
         <div class="ui center aligned segment">
-            <h2>Virtual Account Test</h2>
-            <button id='sendButton' class="ui button">Pay with Virtual Account</button>
+            <h2>Virtual Account(ATM) Test</h2>
+            <button id='sendButton' class="ui button">Pay with Virtual Account(ATM)</button>
         </div>
         <div class="ui segment">
             <pre id="result1" class="ui info message" style="overflow-x: auto"></pre>

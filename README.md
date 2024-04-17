@@ -87,7 +87,7 @@
 
 提供 Payment Request API 服務，詳細的功能、使用方式以及 DEMO 頁面請詳見 [Payment Request API](./Payment_Request) 的頁面
 
-## Virtual Account
+## Virtual Account(ATM)
 
-提供 Virtual Account 服務，詳細的功能以及使用方式請詳見 [Virtual Account](./Virtual_Account) 的頁面  
+提供 Virtual Account(ATM) 服務，詳細的功能以及使用方式請詳見 [Virtual Account](./Virtual_Account) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Virtual_Account/example/index.html) 頁面試試 Get Prime !
