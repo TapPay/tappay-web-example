@@ -75,7 +75,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.18.0"></script>
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.19.1"></script>
     <script>
         TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
         TPDirect.card.setup({
@@ -118,7 +118,7 @@
             // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
             isMaskCreditCardNumber: true,
             maskCreditCardNumberRange: {
-                beginIndex: 6, 
+                beginIndex: 6,
                 endIndex: 11
             }
         })
@@ -179,10 +179,10 @@
 
         $('form').on('submit', function (event) {
             event.preventDefault()
-            
+
             // fix keyboard issue in iOS device
             forceBlurIos()
-            
+
             const tappayStatus = TPDirect.card.getTappayFieldsStatus()
             console.log(tappayStatus)
 
@@ -237,7 +237,7 @@
             $(selector).removeClass('has-error')
             $(selector).removeClass('has-success')
         }
-        
+
         function forceBlurIos() {
             if (!isIos()) {
                 return
@@ -249,7 +249,7 @@
             input.focus()
             input.parentNode.removeChild(input)
         }
-        
+
         function isIos() {
             return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         }

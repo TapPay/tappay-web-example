@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-    
+
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.18.0"></script>    
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.19.1"></script>
 
     <title>Payment Request Button Test</title>
     <style>
@@ -70,12 +70,12 @@
                     <pre><code></code></pre>
                 </div>
             </div>
-            
+
         </div>
-        
+
     </div>
-    
-    
+
+
 
     <script>
         var data = {
@@ -127,7 +127,7 @@
         }
 
         TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
-        
+
         TPDirect.paymentRequestApi.setupApplePay({
             // required, your apple merchant id
             merchantIdentifier: 'merchant.tech.cherri.global.test',

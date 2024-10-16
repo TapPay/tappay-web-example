@@ -16,6 +16,7 @@
 11. Plus Pay
 12. Pi Wallet
 13. Virtual Account
+14. Cash on Delivery
 
 
 ## 測試卡號
@@ -91,3 +92,7 @@
 
 提供 Virtual Account(ATM) 服務，詳細的功能以及使用方式請詳見 [Virtual Account](./Virtual_Account) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Virtual_Account/example/index.html) 頁面試試 Get Prime !
+
+## Cash On Delivery
+提供 Cash On Delivery(超商物流) 服務，詳細的功能以及使用方式請詳見 [Cash On Delivery](./Cash_On_Delivery) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Cash_On_Delivery/example/index.html) 頁面試試 Get Prime !
