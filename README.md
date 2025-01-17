@@ -18,6 +18,19 @@
 13. Virtual Account
 14. Cash on Delivery
 
+## 如何引入
+SRI 驗證版本, 可以確保安全性
+
+```
+<script src="https://js.tappaysdk.com/sdk/tpdirect/<version>" type="text/javascript" 
+integrity="sha256-<hash_key>" crossorigin="anonymous"></script>
+```
+每個版本對應的 hash key 請至 [Release Note](https://github.com/TapPay/tappay-web-example/releases) 中查找
+
+無 SRI 驗證版本, 可以確保安全性
+```
+<script src="https://js.tappaysdk.com/sdk/tpdirect/<version>" type="text/javascript" ></script>
+```
 
 ## 測試卡號
 4242 4242 4242 4242
