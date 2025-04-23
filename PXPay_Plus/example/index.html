@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PXPay Plus Example</title>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.20.0"></script>
+    <script>
+        TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
+    </script>
+</head>
+
+<body>
+    <div class="payment-view ui grid centered stackable doubling">
+        <br>
+        <div class="row"></div>
+        <div class="ten wide column ">
+            <div class="ui center aligned segment">
+                <h2>PXPay Plus Test</h2>
+                <button id='sendButton' class="ui button">Pay with PXPay Plus</button>
+            </div>
+            <div class="ui segment">
+                <pre id="result1" class="ui info message" style="overflow-x: auto"></pre>
+            </div>
+            <div class="ui segment">
+                <pre id="curl" class="ui info message" style="overflow-x: auto">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 還未付款的頁面 index.html
+    // 需要把 prime 送到伺服器
+    var sendButton = document.getElementById("sendButton")
+    $('button#sendButton').click(function() {
+        // callback style
+        TPDirect.pxPayPlus.getPrime(function (error, result) {
+            // result 就是 get prime 拿到的結果
+            document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
+            // 拿到 get prime 結果後就需要往後端伺服器送
+            var command = `Use following command to send to server \n\n
+curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+-H 'content-type: application/json' \\
+-H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
+-d '{
+    "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
+    "prime": "${result.prime}",
+    "amount": "1",
+    "merchant_id": "GlobalTesting_PX_PAY_Plus_EC",
+    "details": "Some item",
+    "cardholder": {
+        "phone_number": "+886923456789",
+        "name": "王小明",
+        "email": "LittleMing@Wang.com",
+        "zip_code": "100",
+        "address": "台北市天龍區芝麻街1號1樓",
+        "national_id": "A123456789"
+    },
+    "result_url": {
+        "frontend_redirect_url": "https://tappay.github.io/tappay-web-example/PXPay_Plus/example/index.html",
+        "backend_notify_url": "https://your.server.com/notify"
+    }
+}'`
+            $("#curl").html(command)
+        })
+    })
+</script>
+
+</html>

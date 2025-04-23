@@ -17,6 +17,7 @@
 12. Pi Wallet
 13. Virtual Account
 14. Cash on Delivery
+15. PXPay Plus
 
 ## 如何引入
 SRI 驗證版本, 可以確保安全性
@@ -109,3 +110,7 @@ integrity="sha256-<hash_key>" crossorigin="anonymous"></script>
 ## Cash On Delivery
 提供 Cash On Delivery(超商物流) 服務，詳細的功能以及使用方式請詳見 [Cash On Delivery](./Cash_On_Delivery) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Cash_On_Delivery/example/index.html) 頁面試試 Get Prime !
+
+## PXPay Plus 
+提供 PXPay Plus 服務，詳細的功能以及使用方式請詳見 [PXPay Plus](./PXPay_Plus) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/PXPay_Plus/example/index.html) 頁面試試 Get Prime !
