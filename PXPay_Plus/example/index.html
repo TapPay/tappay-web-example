@@ -38,7 +38,7 @@
     var sendButton = document.getElementById("sendButton")
     $('button#sendButton').click(function() {
         // callback style
-        TPDirect.pxPayPlus.getPrime(function (error, result) {
+        TPDirect.pxPayPlus.getPrime(function (result) {
             // result 就是 get prime 拿到的結果
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送

@@ -91,7 +91,7 @@ clientip | String | 交易者的 IP 位置
     var sendButton = document.getElementById("sendButton")
     $('button#sendButton').click(function() {
         // callback style
-        TPDirect.pxPayPlus.getPrime(function (error, result) {
+        TPDirect.pxPayPlus.getPrime(function (result) {
             // result 就是 get prime 拿到的結果
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送
@@ -122,38 +122,6 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
 }'`
             $("#curl").html(command)
         })
-
-        // promise style
-//         TPDirect.pxPayPlus.getPrime().then(function (result) {
-//             // result 就是 get prime 拿到的結果
-//             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
-//             // 拿到 get prime 結果後就需要往後端伺服器送
-// var command = `Use following command to send to server \n\n
-// curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
-// -H 'content-type: application/json' \\
-// -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
-// -d '{
-//     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
-//     "prime": "${result.prime}",
-//     "amount": "1",
-//     "merchant_id": "GlobalTesting_PX_PAY_Plus_EC",
-//     "details": "Some item",
-//     "cardholder": {
-//         "phone_number": "+886923456789",
-//         "name": "王小明",
-//         "email": "LittleMing@Wang.com",
-//         "zip_code": "100",
-//         "address": "台北市天龍區芝麻街1號1樓",
-//         "national_id": "A190902632",
-//         "member_id": "0123498765"
-//     },
-//     "result_url": {
-//         "frontend_redirect_url": "https://tappay.github.io/tappay-web-example/PXPay_Plus/example/index.html",
-//         "backend_notify_url": "https://your.server.com/notify"
-//     }
-// }'`
-//             $("#curl").html(command)
-//         })
     })
 </script>
 </html>
