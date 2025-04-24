@@ -103,7 +103,7 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
     "prime": "${result.prime}",
     "amount": "1",
-    "merchant_id": "GlobalTesting_PX_PAY_Plus_EC",
+    "merchant_id": "GlobalTesting_PX_PAY_PLUS_EC",
     "details": "Some item",
     "cardholder": {
         "phone_number": "+886923456789",
