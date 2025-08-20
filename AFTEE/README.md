@@ -102,9 +102,9 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
 -d '{
     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
     "prime": "${result.prime}",
-    "amount": "1",
+    "amount": "10",
     "merchant_id": "GlobalTesting_AFTEE",
-    "details": "Some item",
+    "details": "[{\"item_id\": \"001\",\"item_name\": \"Product\",\"item_category\": \"商品\",\"item_price\": 10,\"item_quantity\": 1}]",
     "cardholder": {
         "phone_number": "+886923456789",
         "name": "王小明",
