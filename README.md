@@ -12,12 +12,12 @@
 7. Payment Request API - 支援 Apple Pay、Direct Pay  
 8. JKO Pay
 9. Easy Wallet
-10. Atome
-11. Plus Pay
-12. Pi Wallet
-13. Virtual Account
-14. Cash on Delivery
-15. PXPay Plus
+10. Plus Pay
+11. Pi Wallet
+12. Virtual Account
+13. Cash on Delivery
+14. PXPay Plus
+15. iPass Money
 
 ## 如何引入
 SRI 驗證版本, 可以確保安全性
@@ -83,11 +83,6 @@ integrity="sha256-<hash_key>" crossorigin="anonymous"></script>
 提供 Easy Wallet 服務，詳細的功能以及使用方式請詳見 [Easy Wallet](./Easy_Wallet) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Easy_Wallet/example/index.html) 頁面試試 Get Prime !
 
-## Atome
-
-提供 Atome 服務，詳細的功能以及使用方式請詳見 [Atome](./Atome) 的頁面  
-或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Atome/example/index.html) 頁面試試 Get Prime !
-
 ## Pi Wallet
 
 提供 Pi Wallet 服務，詳細的功能以及使用方式請詳見 [Pi Wallet](./Pi_Wallet) 的頁面  
@@ -114,3 +109,7 @@ integrity="sha256-<hash_key>" crossorigin="anonymous"></script>
 ## PXPay Plus 
 提供 PXPay Plus 服務，詳細的功能以及使用方式請詳見 [PXPay Plus](./PXPay_Plus) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/PXPay_Plus/example/index.html) 頁面試試 Get Prime !
+
+## iPass Money
+提供 iPass Money 服務，詳細的功能以及使用方式請詳見 [iPass Money](./IPassMoney) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/IPassMoney/example/index.html) 頁面試試 Get Prime !
