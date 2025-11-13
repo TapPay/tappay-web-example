@@ -167,7 +167,7 @@
 
             if (update.status.phone_number === 2) {
                 setNumberFormGroupToError('.phone-group')
-            } else if (update.status.phone.number === 0) {
+            } else if (update.status.phone_number === 0) {
                 setNumberFormGroupToSuccess('.phone-group')
             } else {
                 setNumberFormGroupToNormal('.phone-group')
@@ -185,7 +185,7 @@
                     alert('get prime error ' + result.msg)
                     return
                 }
-                alert('get prime 成功，prime: ' + result.cardholder.prime)
+                alert('get prime 成功，prime: ' + result.prime)
                 var command = `
                 Use following command to send to server \n\n
                 curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-token \\
@@ -193,7 +193,7 @@
                 -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
                 -d '{
                     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
-                    "cardholder_prime": "${result.cardholder.prime}",
+                    "cardholder_prime": "${result.prime}",
                     "amount": "1",
                     "card_key": "card_key",
                     "card_yoken": "card_yoken",
