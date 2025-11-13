@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>TapPay Fields Bootstrap Example</title>
+    <title>Cardholder Example</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap -->
@@ -46,19 +46,19 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1>TapPay Fields Bootstrap Example</h1>
-            <p class="lead">TapPay Fields 是 三個 host 在 TapPay 的網頁，利用 iframe 的方式嵌入商家網頁，提供安全的卡號輸入方式</p>
+            <h1>Cardholder Example</h1>
+            <p class="lead">Cardholder Fields 是 三個 host 在 TapPay 的網頁，利用 iframe 的方式嵌入商家網頁，提供安全輸入持卡人資訊的方式</p>
         </div>
         <form>
-            <div class="form-group">
+            <div class="form-group name-en-group">
                 <label for="name-en">English Name</label>
                 <div class="form-control" id="name_en"></div>
             </div>
-            <div class="form-group">
+            <div class="form-group email-group">
                 <label for="email">Email address</label>
                 <div class="form-control" id="email"></div>
             </div>
-            <div id="phone_group" class="form-group" style="display: inline-flex;">
+            <div class="form-group phone-group" style="display: inline-flex;">
                 <div style="min-width: 100px; max-width: 20%; margin-right:8px;">
                     <label>Country code</label>
                     <div id="phone_country_code" class="form-control"></div>
@@ -67,18 +67,6 @@
                     <label>Phone</label>
                     <div id="phone_number" class="form-control"></div>
                 </div>
-            </div>
-            <div class="form-group card-number-group">
-                <label for="card-number" class="control-label"><span id="cardtype"></span>卡號</label>
-                <div class="form-control card-number"></div>
-            </div>
-            <div class="form-group expiration-date-group">
-                <label for="expiration-date" class="control-label">卡片到期日</label>
-                <div class="form-control expiration-date" id="tappay-expiration-date"></div>
-            </div>
-            <div class="form-group ccv-group">
-                <label for="ccv" class="control-label">卡片後三碼</label>
-                <div class="form-control ccv"></div>
             </div>
 
             <button type="submit" class="btn btn-default">Pay</button>
@@ -89,25 +77,11 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.19.2" integrity="sha256-Q1ER14FSKidfPCI3JVsg+Ad9QMDo/QxUJ1uZoR8GLkU=" crossorigin="anonymous"></script>
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.24.0"></script>
     <script>
         TPDirect.setupSDK(11327, 'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC', 'sandbox')
-        TPDirect.card.setup({
+        TPDirect.cardholder.setup({
             fields: {
-                number: {
-                    element: '.form-control.card-number',
-                    placeholder: '**** **** **** ****'
-                },
-                expirationDate: {
-                    element: document.getElementById('tappay-expiration-date'),
-                    placeholder: 'MM / YY'
-                },
-                ccv: {
-                    element: $('.form-control.ccv')[0],
-                    placeholder: '後三碼'
-                }
-            },
-            cardholder: {
                 name_en: {
                     element: document.getElementById('name_en'),
                     placeholder: 'English Name'
@@ -126,14 +100,10 @@
                         placeholder: '912345678'
                     }
                 }
-
             },
             styles: {
                 'input': {
                     'color': 'gray'
-                },
-                'input.ccv': {
-                    // 'font-size': '16px'
                 },
                 ':focus': {
                     'color': 'black'
@@ -149,21 +119,15 @@
                         'color': 'orange'
                     }
                 }
-            },
-            // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
-            isMaskCreditCardNumber: true,
-            maskCreditCardNumberRange: {
-                beginIndex: 6,
-                endIndex: 11
             }
         })
         // listen for TapPay Field
-        TPDirect.card.onUpdate(function (update) {
+        TPDirect.cardholder.onUpdate(function (update) {
             /* Disable / enable submit button depend on update.canGetPrime  */
             /* ============================================================ */
 
             // update.canGetPrime === true
-            //     --> you can call TPDirect.card.getPrime()
+            //     --> you can call TPDirect.cardholder.getPrime()
             // const submitButton = document.querySelector('button[type="submit"]')
             if (update.canGetPrime) {
                 // submitButton.removeAttribute('disabled')
@@ -173,86 +137,68 @@
                 $('button[type="submit"]').attr('disabled', true)
             }
 
-
-            /* Change card type display when card type change */
-            /* ============================================== */
-
-            // cardTypes = ['visa', 'mastercard', ...]
-            var newType = update.cardType === 'unknown' ? '' : update.cardType
-            $('#cardtype').text(newType)
-
-
-
-            /* Change form-group style when tappay field status change */
+            /* Change form-group style when cardholder field status change */
             /* ======================================================= */
 
             // number 欄位是錯誤的
-            if (update.status.number === 2) {
-                setNumberFormGroupToError('.card-number-group')
-            } else if (update.status.number === 0) {
-                setNumberFormGroupToSuccess('.card-number-group')
+            if (update.status.name_en === 2) {
+                setNumberFormGroupToError('.name-en-group')
+            } else if (update.status.name_en === 0) {
+                setNumberFormGroupToSuccess('.name-en-group')
             } else {
-                setNumberFormGroupToNormal('.card-number-group')
+                setNumberFormGroupToNormal('.name-en-group')
             }
 
-            if (update.status.expiry === 2) {
-                setNumberFormGroupToError('.expiration-date-group')
-            } else if (update.status.expiry === 0) {
-                setNumberFormGroupToSuccess('.expiration-date-group')
+            if (update.status.email === 2) {
+                setNumberFormGroupToError('.email-group')
+            } else if (update.status.email === 0) {
+                setNumberFormGroupToSuccess('.email-group')
             } else {
-                setNumberFormGroupToNormal('.expiration-date-group')
+                setNumberFormGroupToNormal('.email-group')
+            }
+            
+            if (update.status.phone_country_code === 2) {
+                setNumberFormGroupToError('.phone-group')
+            } else if (update.status.phone_country_code === 0) {
+                setNumberFormGroupToSuccess('.phone-group')
+            } else {
+                setNumberFormGroupToNormal('.phone-group')
             }
 
-            if (update.status.ccv === 2) {
-                setNumberFormGroupToError('.ccv-group')
-            } else if (update.status.ccv === 0) {
-                setNumberFormGroupToSuccess('.ccv-group')
+            if (update.status.phone_number === 2) {
+                setNumberFormGroupToError('.phone-group')
+            } else if (update.status.phone.number === 0) {
+                setNumberFormGroupToSuccess('.phone-group')
             } else {
-                setNumberFormGroupToNormal('.ccv-group')
+                setNumberFormGroupToNormal('.phone-group')
             }
         })
 
         $('form').on('submit', function (event) {
             event.preventDefault()
-
             // fix keyboard issue in iOS device
             forceBlurIos()
 
-            const tappayStatus = TPDirect.card.getTappayFieldsStatus()
-            console.log(tappayStatus)
-
-            // Check TPDirect.card.getTappayFieldsStatus().canGetPrime before TPDirect.card.getPrime
-            if (tappayStatus.canGetPrime === false) {
-                alert('can not get prime')
-                return
-            }
-
             // Get prime
-            TPDirect.card.getPrime(function (result) {
+            TPDirect.cardholder.getPrime(function (error, result) {
                 if (result.status !== 0) {
                     alert('get prime error ' + result.msg)
                     return
                 }
-                alert('get prime 成功，prime: ' + result.card.prime)
+                alert('get prime 成功，prime: ' + result.cardholder.prime)
                 var command = `
                 Use following command to send to server \n\n
-                curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
+                curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-token \\
                 -H 'content-type: application/json' \\
                 -H 'x-api-key: partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM' \\
                 -d '{
                     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
-                    "prime": "${result.card.prime}",
+                    "cardholder_prime": "${result.cardholder.prime}",
                     "amount": "1",
+                    "card_key": "card_key",
+                    "card_yoken": "card_yoken",
                     "merchant_id": "GlobalTesting_CTBC",
-                    "details": "Some item",
-                    "cardholder": {
-                        "phone_number": "+886923456789",
-                        "name": "王小明",
-                        "email": "LittleMing@Wang.com",
-                        "zip_code": "100",
-                        "address": "台北市天龍區芝麻街1號1樓",
-                        "national_id": "A123456789"
-                    }
+                    "details": "Some item"
                 }'`.replace(/                /g, '')
                 document.querySelector('#curl').innerHTML = command
             })

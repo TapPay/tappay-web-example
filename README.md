@@ -19,6 +19,8 @@
 14. PXPay Plus
 15. iPass Money
 16. AFTEE (Buy Now Pay Later)
+17. Cardholder
+18. OPPay
 
 ## 如何引入
 SRI 驗證版本, 可以確保安全性
@@ -118,3 +120,11 @@ integrity="sha256-<hash_key>" crossorigin="anonymous"></script>
 ## AFTEE (Buy Now Pay Later)
 提供 AFTEE 服務，詳細的功能以及使用方式請詳見 [AFTEE](./AFTEE) 的頁面  
 或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/AFTEE/example/index.html) 頁面試試 Get Prime !
+
+## Cardholder
+提供 Cardholder 服務，詳細的功能以及使用方式請詳見 [Cardholder](./Cardholder) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/Cardholder/example/index.html) 頁面試試 Get Prime !
+
+## OPPay
+提供 OPPay 服務，詳細的功能以及使用方式請詳見 [OPPay](./OPPay) 的頁面  
+或是可以直接到 [DEMO](https://tappay.github.io/tappay-web-example/OPPay/example/index.html) 頁面試試 Get Prime !
