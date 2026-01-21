@@ -1,14 +1,14 @@
-# OPPay with TapPay
+# 分期趣 with TapPay
 
 ## Required
 
-1. 請使用 Web SDK v5.23.0 以上版本使用 OPPay, 舊版本不支援 OPPay
+1. 請使用 Web SDK v5.25.0 以上版本使用 分期趣, 舊版本不支援 分期趣
 2. 請到 TapPay Portal 申請帳號，取得 APP_ID 和 APP_KEY
 
 ## Overview
 
-1. 前端用 `TPDirect.oppay.getPrime()` 拿到 OPPay 專屬的 `prime`
-2. 前端等待後端伺服器回傳 `payment_url` 並使用 `TPDirect.redirect(payment_url)` 的方式讓使用者進行 OPPay 付款
+1. 前端用 `TPDirect.gogoPay.getPrime()` 拿到 分期趣 專屬的 `prime`
+2. 前端等待後端伺服器回傳 `payment_url` 並使用 `TPDirect.redirect(payment_url)` 的方式讓使用者進行 分期趣 付款
 
 ## 教學
 
@@ -17,7 +17,7 @@
 首先我們要建立出付款頁面 `index.html` 並且在 `<head></head>` 中引入 SDK
 
 ```html
-<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.23.0"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.25.0"></script>
 ```
 
 ### Step 2
@@ -30,10 +30,10 @@ TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
 
 ### Step 3
 
-使用 `TPDirect.oppay.getPrime(callback)` 去拿 `prime`
+使用 `TPDirect.gogoPay.getPrime(callback)` 去拿 `prime`
 
 ```js
-TPDirect.oppay.getPrime(function(result) {
+TPDirect.gogoPay.getPrime(function(result) {
     // code
 })
 ```
@@ -44,7 +44,7 @@ result 的資料格式為
 --- | --- | ---
 status | Int | 錯誤代碼，0 為成功
 msg | String | 錯誤訊息
-prime | String | prime 字串 `op_`
+prime | String | prime 字串 `go_`
 client_ip | String | 交易者的 IP 位置
 
 
@@ -57,7 +57,7 @@ client_ip | String | 交易者的 IP 位置
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OPPay Example</title>
+    <title>分期趣 Example</title>
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
@@ -73,8 +73,8 @@ client_ip | String | 交易者的 IP 位置
     <div class="row"></div>
     <div class="ten wide column ">
         <div class="ui center aligned segment">
-            <h2>OPPay Test</h2>
-            <button id='sendButton' class="ui button">Pay with OPPay</button>
+            <h2>分期趣 Test</h2>
+            <button id='sendButton' class="ui button">Pay with 分期趣</button>
         </div>
         <div class="ui segment">
             <pre id="result1" class="ui info message" style="overflow-x: auto"></pre>
@@ -91,7 +91,7 @@ client_ip | String | 交易者的 IP 位置
     var sendButton = document.getElementById("sendButton")
     $('button#sendButton').click(function() {
         // callback style
-        TPDirect.oppay.getPrime(function (result) {
+        TPDirect.gogoPay.getPrime(function (result) {
             // result 就是 get prime 拿到的結果
             document.querySelector('#result1').innerHTML = JSON.stringify(result, null, 4)
             // 拿到 get prime 結果後就需要往後端伺服器送
@@ -103,7 +103,8 @@ curl -X POST https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime \\
     "partner_key": "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM",
     "prime": "${result.prime}",
     "amount": "10",
-    "merchant_id": "GlobalTesting_OPPay",
+    "instalemnt": 3,
+    "merchant_id": "GlobalTesting_GOGO_Pay",
     "details": "[{\"item_name\": \"Product\",\"item_price\": 10,\"item_quantity\": 1}]",
     "cardholder": {
         "phone_number": "+886923456789",
