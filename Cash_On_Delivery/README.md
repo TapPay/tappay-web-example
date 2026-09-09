@@ -38,7 +38,7 @@ TPDirect.setupSDK(APP_ID, "APP_KEY", 'SERVER_TYPE')
 
 名稱 | 型別 | 說明
 --- | --- | ---
-shipType | String | 物流通路，請選擇以下類型<br>TW_UNIMART：7-11<br>TW_FAMI：全家便利商店<br>TW_OK：OK便利商店<br>TW_HILIFE：萊爾富便利商店
+shipType | String | 物流通路，請選擇以下類型<br>TW_UNIMART：7-11<br>TW_FAMI：全家便利商店<br>TW_HILIFE：萊爾富便利商店
 
 ```js
 TPDirect.cashOnDelivery.setShipType(shipType , (status, msg) => {
@@ -66,7 +66,7 @@ TPDirect.cashOnDelivery.getStoreId((status, msg, result) => {
 --- |---------------------|---------------------------------------------------------------------------------------------------------------------
 status | Int                 | 錯誤代碼，0 為成功，427 表示使用者關閉地圖                                                                                            
 msg | String              | 錯誤訊息                                                                                                                
-result | Object |<table><thead><tr><th>名稱</th><th>型別</th><th>內容</th></tr></thead><tbody><tr><td>store_id</td><td>String</td><td>門市店號</td></tr><tr><td>store_name</td><td>String</td><td>門市名稱</td></tr><tr><td>store_phone</td><td>String</td><td>門市電話</td></tr><tr><td>store_address</td><td>String</td><td>門市地址</td></tr><tr><td>shipType</td><td>String</td><td>物流通路，請選擇以下類型<br>TW_UNIMART：7-11<br>TW_FAMI：全家便利商店<br>TW_OK：OK便利商店<br>TW_HILIFE：萊爾富便利商店</td></tr></tbody></table>
+result | Object |<table><thead><tr><th>名稱</th><th>型別</th><th>內容</th></tr></thead><tbody><tr><td>store_id</td><td>String</td><td>門市店號</td></tr><tr><td>store_name</td><td>String</td><td>門市名稱</td></tr><tr><td>store_phone</td><td>String</td><td>門市電話</td></tr><tr><td>store_address</td><td>String</td><td>門市地址</td></tr><tr><td>shipType</td><td>String</td><td>物流通路，請選擇以下類型<br>TW_UNIMART：7-11<br>TW_FAMI：全家便利商店<br>TW_HILIFE：萊爾富便利商店</td></tr></tbody></table>
 
 ### Step 5
 
@@ -117,7 +117,6 @@ clientip | String | 交易者的 IP 位置
             <select name="shipType" id="shipType" class="ui dropdown">
                 <option value="TW_FAMI">全家</option>
                 <option value="TW_UNIMART">7-11</option>
-                <option value="TW_OK">OK</option>
                 <option value="TW_HILIFE">萊爾富</option>
             </select>
             <button id='getStoreIdButton' class="ui button">Get Store Id</button>
